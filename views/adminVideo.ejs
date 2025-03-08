@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stylesheet/adminVideos.css" />
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="navBar">
+        <div class="navLogo">
+          <a
+            href="/course/dashboard"
+            style="text-decoration: none; color: inherit"
+          >
+            <i class="ri-arrow-left-line" style="font-size: 25px"></i>
+          </a>
+
+          <div class="navimg">
+            <img
+              src="/images/final.png"
+              width="60px"
+              height="60px"
+              alt="logo"
+            />
+          </div>
+
+          <div class="navTitle">
+            <p><%= singleCourse.title %></p>
+          </div>
+        </div>
+
+        <div class="navLinks">
+          <div class="dashboard">
+            <a href="/course/dashboard" class="nav-link" id="coursesLink"
+              >Dashboard</a
+            >
+          </div>
+
+          <div class="ratingTop none">
+            <i class="ri-star-fill" style="color: #7808d0"></i>
+            <p>Leave us a rating</p>
+          </div>
+
+          <div class="progress">
+            <p>Your progress</p>
+            <div
+              role="progressbar"
+              aria-valuenow="0"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="warpper">
+      <div class="video-container">
+        <video
+          id="my-video"
+          class="video-js vjs-theme-fantasy"
+          controls
+          preload="auto"
+          poster="<%= courseVideos[0]?.videoImage || '/images/default-poster.jpg' %>"
+          data-setup="{}"
+        >
+          <% if (courseVideos.length > 0) { %>
+          <source
+            src="<%= courseVideos[0]?.videoLink || '' %>"
+            type="video/mp4"
+          />
+          <% } else { %>
+          <p class="vjs-no-js">No video available for this course.</p>
+          <% } %>
+        </video>
+        <div class="playlist">
+          <div class="nextvideo">
+            <div class="heading">
+              <h1><%= singleCourse.title %> playlist</h1>
+            </div>
+            <div class="allVideos">
+              <% courseVideos.forEach((video, index) => { %>
+              <div class="img" data-index="<%= index %>">
+                <img
+                  src="<%= video.videoImage || '/images/default-thumbnail.jpg' %>"
+                  alt="<%= video.videoTitle %>"
+                />
+                <div class="titles">
+                  <div class="title">
+                    <h5><%= video.videoHeading %></h5>
+                  </div>
+                  <div class="description">
+                    <p><%= video.overview %></p>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="background back">
+        <div class="ratingContainer rateDisplay" id="ratingContainer">
+          <i class="ri-close-fill closeBtn close"></i>
+          <h1>GeeksforGeeks Java Course</h1>
+          <div class="ratingBox"><span id="rating">0</span>/5</div>
+          <div class="stars" id="stars">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <p>Share your review:</p>
+          <textarea
+            id="review"
+            placeholder="Write your review here"
+            style="resize: none"
+          ></textarea>
+          <button id="submit">Submit</button>
+        </div>
+
+        <div class="thankyou display" id="thankyou">
+          <i class="ri-close-fill closeBtn close"></i>
+          <img
+            src="../images/right.png"
+            alt=""
+            width="50px"
+            height="50px"
+            srcset=""
+          />
+          <p>Thank you for sharing your review</p>
+          <button class="close">Close</button>
+        </div>
+      </div>
+      <div class="textOverview">
+        <div class="textContent">
+          <div class="heading">
+            <h3>Overview</h3>
+          </div>
+          <div class="text" id="video-overview-text">
+            <p><%= courseVideos[0]?.overview || "No overview available." %></p>
+          </div>
+        </div>
+        <div class="middleBar">
+          <div class="courseDetail">
+            <div class="rating">
+              <div class="rateReviwe">
+                <div class="ratingT">
+                  <i class="ri-star-fill" style="color: #7808d0"></i>
+                  <h3 id="video-rating">
+                    <%= courseVideos[0]?.rating || "No rating available." %>
+                  </h3>
+                </div>
+                <div class="reviews">
+                  <p>1,256 reviews</p>
+                </div>
+              </div>
+              <div class="students">
+                <h3>2,546</h3>
+                <p>students</p>
+              </div>
+              <div class="time">
+                <h3 id="video-duration">
+                  <%= courseVideos[0]?.duration || "No duration available." %>
+                </h3>
+                <p>Duration</p>
+              </div>
+            </div>
+            <div class="update">
+              <i class="ri-refresh-line"></i>
+              <p id="video-updated">
+                Updated at <%= courseVideos[0]?.createdAt || "No Dateavailable."
+                %>
+              </p>
+            </div>
+            <div class="audio">
+              <i class="ri-global-line"></i>
+              <p id="video-language">
+                <%= courseVideos[0]?.language || "No language available." %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <script>
+                  // Get the course videos and playlist items
+                  const videos = <%- JSON.stringify(courseVideos) %>;
+                  const playlistItems = document.querySelectorAll(".img");
+
+                  // Initialize the video player
+                  const player = videojs("my-video");
+
+                  // Get reference to the progress bar element
+                  const progressBar = document.querySelector('[role="progressbar"]');
+
+                  // Function to update the progress bar
+                  function updateProgressBar() {
+                    const duration = player.duration();
+                    const currentTime = player.currentTime();
+
+                    // Calculate the progress percentage
+                    let progressPercentage = (currentTime / duration) * 100;
+                    progressPercentage = Math.ceil(progressPercentage);
+
+                    // Ensure valid progress value before updating
+                    if (!isNaN(progressPercentage) && isFinite(progressPercentage)) {
+                      progressBar.setAttribute("aria-valuenow", progressPercentage);
+                      progressBar.style.setProperty("--value", `${progressPercentage}%`);
+                      progressBar.setAttribute("aria-label", `${progressPercentage}%`);
+                    }
+                  }
+
+
+                  // Function to load a video and update the UI
+               // Function to load a video and update the UI
+            function loadVideo(index) {
+              const video = videos[index];
+
+              if (video) {
+                // Update the video player source
+                player.src({ type: "video/mp4", src: video.videoLink || "" });
+                player.ready(() => player.play());
+
+                // Update video metadata
+                const videoTitleEl = document.getElementById("video-title");
+                if (videoTitleEl) {
+                  videoTitleEl.textContent = video.videoTitle || "No Title available.";
+                }
+
+                document.getElementById("video-overview-text").textContent =
+                  video.overview || "No overview available.";
+                document.getElementById("video-rating").textContent =
+                  video.rating || "No rating available.";
+                document.getElementById("video-duration").textContent =
+                  video.duration || "No duration available.";
+                document.getElementById("video-language").textContent =
+                  video.language || "No language available.";
+                document.getElementById("video-updated").textContent =
+                  "Updated at " + (video.createdAt || "No Date available.");
+
+                // Update the poster image dynamically
+                const videoElement = document.getElementById("my-video");
+                videoElement.poster = video.videoImage || '/images/default-poster.jpg';
+
+                // Highlight the active playlist item
+                playlistItems.forEach(item => item.classList.remove("active"));
+                playlistItems[index].classList.add("active");
+                      const nav = document.querySelector(".ratingTop")
+                       nav.classList.remove("none")
+                // Reset progress tracking for the new video
+                const progressKey = `videoProgress-${video.id || `video-${index}`}`;
+                const storedProgress = localStorage.getItem(progressKey);
+                if (storedProgress) {
+                  const parsedProgress = parseInt(storedProgress, 10);
+                  if (!isNaN(parsedProgress) && parsedProgress >= 0 && parsedProgress <= 100) {
+                    const duration = player.duration();
+                    if (duration > 0) {
+                      player.currentTime((parsedProgress / 100) * duration);
+                    }
+                  }
+                }
+              }
+            }
+
+
+                  // Initialize playlist item click events
+                  playlistItems.forEach((item, index) => {
+                    item.addEventListener("click", () => loadVideo(index));
+                  });
+
+                  // Load the first video on page load
+                  if (playlistItems.length > 0) {
+                    playlistItems[0].classList.add("active");
+                    loadVideo(0);
+                  }
+
+                  // Handle duration edge cases
+                  player.on("loadedmetadata", updateProgressBar);
+
+                  // Save video progress
+                  player.on("timeupdate", () => {
+                    const currentTime = player.currentTime();
+                    const duration = player.duration();
+
+                    if (duration > 0) {
+                      const progressPercentage = Math.ceil((currentTime / duration) * 100);
+                      const videoIndex = playlistItems.findIndex(item =>
+                        item.classList.contains("active")
+                      );
+                      const progressKey = `videoProgress-${videos[videoIndex]?.id || `video-${videoIndex}`}`;
+                      localStorage.setItem(progressKey, progressPercentage);
+                    }
+
+                    // Update progress bar
+                    updateProgressBar();
+                  });
+                  const stars = document.querySelectorAll(".star");
+      const ratingDisplay = document.getElementById("rating"); // This is the span to show the rating value
+      const reviewText = document.getElementById("review");
+      const submitBtn = document.getElementById("submit");
+      const ratingContainer = document.getElementById("ratingContainer"); // Updated to match the new ID
+      const thankyou = document.querySelector("#thankyou");
+      const closeBtns = document.querySelectorAll(".close");
+      const background = document.querySelector(".background");
+      const nav = document.querySelector(".ratingTop")
+
+      nav.classList.remove("none")
+
+
+      // Function to handle star click
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          const value = parseInt(star.getAttribute("data-value")); // Get the star's value
+          ratingDisplay.innerText = value; // Update the displayed rating
+
+
+          stars.forEach((s) =>
+            s.classList.remove("one", "two", "three", "four", "five", "selected")
+          );
+
+          // Highlight stars up to the selected one
+          stars.forEach((s, index) => {
+            if (index < value) {
+              s.classList.add(getStarColorClass(value));
+            }
+          });
+
+          star.classList.add("selected"); // Mark the clicked star as selected
+        });
+      });
+
+      // Function to get the CSS class for star color
+      function getStarColorClass(value) {
+        switch (value) {
+          case 1:
+            return "one";
+          case 2:
+            return "two";
+          case 3:
+            return "three";
+          case 4:
+            return "four";
+          case 5:
+            return "five";
+          default:
+            return "";
+        }
+      }
+
+      // Handle form submission
+      submitBtn.addEventListener("click", () => {
+        const review = reviewText.value.trim();
+        const userRating = parseInt(ratingDisplay.innerText);
+
+        if (!userRating || !review) {
+          alert("Please select a rating and provide a review before submitting.");
+          return;
+        }
+
+
+        background.classList.remove("back");
+        ratingContainer.classList.add("rateDisplay");
+        nav.classList.add("none")
+        thankyou.classList.remove("display");
+        reviewText.value = "";
+        ratingDisplay.innerText = "0";
+        stars.forEach((s) =>
+          s.classList.remove("one", "two", "three", "four", "five", "selected")
+        );
+      });
+
+      // Handle the display of the rating modal
+      const ratingTop = document.querySelector(".ratingTop");
+      ratingTop.addEventListener("click", () => {
+        background.classList.remove("back");
+        ratingContainer.classList.remove("rateDisplay"); // Show the rating container
+        thankyou.classList.add("display"); // Hide thank you message
+      });
+
+      // Handle closing the modal
+      closeBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          background.classList.add("back");
+          ratingContainer.classList.add("rateDisplay"); // Hide the rating container
+          thankyou.classList.add("display"); // Hide thank you message
+        });
+      });
+    </script>
+  </body>
+</html>

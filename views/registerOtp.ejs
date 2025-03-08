@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyLane</title>
+    <link rel="stylesheet" href="../stylesheet/otp.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="image">
+        <img src="../images/registration.svg" alt="forgot-illustration" />
+      </div>
+      <form
+        class="forgot"
+        action="/new"
+        method="post"
+        onsubmit="combineOTP(event)"
+      >
+        <div class="text">
+          <h1>registration</h1>
+          <p>Enter the OTP</p>
+        </div>
+
+        <div class="error" style="display: none">
+          <p style="color: white">This is an error</p>
+        </div>
+
+        <div class="inputWrapper inputEmail">
+          <input type="number" class="otp" maxlength="1" required />
+          <input type="number" class="otp" maxlength="1" required />
+          <input type="number" class="otp" maxlength="1" required />
+          <input type="number" class="otp" maxlength="1" required />
+        </div>
+        <input type="hidden" id="finalOtp" name="otp" />
+        <input type="hidden" value="<%=email %>" name="email" />
+        <input type="hidden" value="<%=username %>" name="username" />
+        <input type="hidden" value="<%=password %>" name="password" />
+
+        <div class="button">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/c2025843a8.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../scripts/otp.js"></script>
+  </body>
+</html>

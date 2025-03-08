@@ -1,0 +1,753 @@
+:root {
+  --loading-grey: #b7b7b7;
+}
+
+html,
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f8cf;
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+a {
+  all: unset;
+  text-decoration: none;
+  width: 100%;
+}
+.wrapper {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  color: rgb(39, 39, 39);
+  flex-direction: column;
+  align-items: center;
+}
+.user {
+  padding: 10px;
+  height: 80px;
+  box-shadow: 1px 3px 5px 2px rgba(0, 0, 0, 0.379);
+  color: rgb(39, 39, 39);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  border-radius: 15px;
+  gap: 15px;
+}
+.userDet {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  color: rgb(39, 39, 39);
+}
+.input {
+  background-color: #ffffff;
+}
+.input input {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 2px solid rgb(39, 39, 39);
+  color: rgb(39, 39, 39);
+  outline: none;
+  border-radius: 50px;
+  transition: 0.5s;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+.overlay {
+  width: 90%;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  background-color: #00000000;
+}
+.profile {
+  position: relative;
+}
+.profile img {
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.ask {
+  all: unset;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  padding: 1px 15px;
+  border-right: 1px solid rgba(128, 128, 128, 0.552);
+  cursor: pointer;
+  gap: 15px;
+  color: rgba(39, 39, 39, 0.828);
+  transition: 0.5s;
+  margin-left: 55px;
+  width: 15%;
+  position: relative;
+}
+.askbtn {
+  all: unset;
+  color: #ffffff;
+  border-radius: 50px;
+  color: rgb(39, 39, 39);
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s;
+  width: 25%;
+}
+.ask:hover {
+  background-color: rgba(128, 128, 128, 0.12);
+}
+
+.border {
+  width: 2px;
+  height: 20px;
+  background-color: rgba(128, 128, 128, 0.552);
+}
+.allquestions {
+  position: relative;
+}
+.randomQuestions {
+  width: 470px;
+  color: rgb(39, 39, 39);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(128, 128, 128, 0.523);
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  gap: 0;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+.randomuserPic img {
+  border: 2px solid rgba(0, 0, 0, 0.339);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translatey(8px);
+}
+.randomUser {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  padding: 0px 18px;
+  align-items: start;
+}
+.randomuserDetails {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.randomTitle {
+  word-wrap: break-word;
+  text-wrap: wrap;
+  padding: 0px 18px;
+}
+.randomuserName h4 {
+  height: 0;
+  display: flex;
+  align-items: center;
+}
+.randomuserupdated {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  transform: translateY(-15px);
+}
+.border {
+  width: 2px;
+  height: 20px;
+  background-color: gray;
+  transform: translateY(15px);
+}
+.buttons .allbtns {
+  display: flex;
+  padding: 0px 18px;
+  flex-direction: row;
+  gap: 5px;
+}
+.likesBtns {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
+}
+.likesBtns button {
+  all: unset;
+}
+.thumbs {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  height: 15px;
+  padding: 9px;
+  align-items: start;
+  border: 1px solid rgba(143, 143, 143, 0.516);
+  border-radius: 25px;
+}
+.count {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  position: relative;
+  transform: translateY(-15px);
+}
+.like {
+  transform: translateY(-15px);
+}
+.comment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transform: translateY(-8px);
+  cursor: pointer;
+}
+.background {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.576);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+  z-index: 999999;
+}
+.userQuestions {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  position: relative;
+  padding: 30px;
+  border-radius: 15px;
+  z-index: 99999;
+}
+.heading {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.conditions {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background-color: #7808d0;
+  color: white;
+  border-radius: 8px;
+  padding: 5px;
+}
+.conditionsPara li {
+  line-height: 2rem;
+}
+.question {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+.question input {
+  outline: none;
+  width: 96.5%;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: none;
+  padding: 10px;
+  font-size: 15px;
+  overflow-y: scroll;
+  outline: none;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+textarea::-webkit-scrollbar {
+  display: none;
+}
+textarea {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.addbtns {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-top: 15px;
+}
+.addquestion button {
+  all: unset;
+  text-align: center;
+  padding: 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: #7908d0ef;
+  color: white;
+}
+.cancelquestion button {
+  all: unset;
+  text-align: center;
+  padding: 15px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: 1px solid black;
+  color: rgb(0, 0, 0);
+}
+.cancelquestion button:hover {
+  border: none;
+  background-color: rgb(251, 3, 3);
+  color: white;
+}
+.addquestion button:hover {
+  background-color: #7908d0;
+}
+.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+  font-size: 25px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.display {
+  display: none;
+}
+.overflow {
+  overflow-y: hidden;
+}
+.overflow::-webkit-scrollbar {
+  display: none;
+}
+.overflow {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.description .more-text {
+  display: none;
+}
+.description .less-text {
+  display: none;
+}
+.see-more-btn {
+  all: unset;
+  color: rgb(2, 95, 245);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.see-less-btn {
+  all: unset;
+  color: rgb(2, 95, 245);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.description {
+  word-wrap: break-word;
+  text-wrap: wrap;
+}
+.commentsDiv {
+  height: auto;
+  margin-top: 8px;
+  padding: 0;
+  transition: all 0.3s;
+  border-radius: 8px;
+}
+.img img {
+  border-radius: 50%;
+  background-color: white;
+  padding: 2px;
+  transform: translateY(5px);
+}
+.add {
+  width: 92.5%;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  background-color: #a0a0a076;
+  padding: 12px 18px;
+  border-radius: 5px;
+}
+.commentinputField input {
+  all: unset;
+  border: 1px solid black;
+  border-radius: 25px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 98%;
+  padding: 12px 18px;
+}
+.completeComments,
+.allcomments {
+  display: flex;
+  flex-direction: column;
+}
+.commentButton button {
+  all: unset;
+  padding: 8px;
+  border-radius: 25px;
+  background-color: #7808d0;
+  cursor: pointer;
+  color: white;
+  margin-left: 35px;
+}
+
+.allcomments {
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s height;
+}
+.headingComments p {
+  padding: 0px 18px;
+  font-size: 16px;
+  font-weight: 535;
+}
+.commentsBorder {
+  border-top: 1px solid gray;
+}
+.commentTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.commentTitle .cross {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 18px;
+}
+.commentUser {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-top: 5px;
+  align-items: center;
+}
+.commentuserPic {
+  border-radius: 50%;
+  background-color: white;
+  transform: translateY(-5px);
+}
+.commentuserDeatils {
+  display: flex;
+  flex-direction: column;
+}
+.commentUsername {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.commentDate {
+  font-size: 15px;
+}
+.mainComment {
+  max-width: 80%;
+}
+/* Main container for the comment */
+.commentUser {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  font-family: Arial, sans-serif;
+}
+
+.commentuserPic img {
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+.commentuserDeatils {
+  flex: 1;
+}
+
+.commentUsername {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.commentUsername h4 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: bold;
+}
+.commentDate p {
+  margin: 0;
+  font-size: 12px;
+  color: #7f8c8d;
+  transform: translateY(-4px);
+}
+
+.mainComment p {
+  margin: 0;
+  font-size: 14px;
+  word-wrap: break-word;
+  text-wrap: wrap;
+  color: #34495e;
+}
+
+.commentActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.commentActions button {
+  background-color: #7808d0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.commentActions button:hover {
+  background-color: #5e06a8;
+}
+.commentDisplay {
+  display: block;
+}
+.commentField {
+  position: relative;
+}
+.commentOverlay {
+  width: 250px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  right: 0;
+  cursor: pointer;
+  transform: translateX(25px);
+}
+
+/* loaders */
+
+.communityprofilepic {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  position: absolute;
+}
+.communityQuestion {
+  position: absolute;
+  top: 0;
+  padding: 10px;
+  height: 50px;
+  background-color: #fffcfc;
+}
+.communityHeadline {
+  width: 420px;
+  height: 30px;
+  border-radius: 12px;
+}
+
+.communityAsk {
+  width: 90px;
+  height: 20px;
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 99999;
+}
+.communityQuestionsLoader {
+  width: 470px;
+  color: rgb(39, 39, 39);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(128, 128, 128, 0.523);
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  gap: 0;
+  border-radius: 5px;
+  position: absolute;
+  top: 15px;
+  z-index: 9999;
+}
+.userLoader {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 15px;
+  align-items: center;
+}
+.profilepicLoader {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translatey(8px);
+}
+.dataLoader {
+  display: flex;
+  flex-direction: column;
+}
+.randomUserLoader {
+  width: 100px;
+  height: 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+.randomUserdataLoader {
+  width: 150px;
+  height: 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+.bottombox {
+  padding: 16px;
+}
+.communityQuestionLoader {
+  width: 350px;
+  height: 15px;
+  border-radius: 12px;
+  margin-top: 30px;
+}
+.communityDescriptionLoader {
+  width: 300px;
+  height: 15px;
+  border-radius: 12px;
+  margin-top: 30px;
+}
+.communityLikesLoader {
+  width: 150px;
+  height: 15px;
+  border-radius: 12px;
+  margin-top: 50px;
+}
+
+.communityprofilepic,
+.communityHeadline,
+.communityAsk,
+.randomUserLoader,
+.randomUserdataLoader,
+.communityQuestionLoader,
+.communityDescriptionLoader,
+.communityLikesLoader,
+.profilepicLoader {
+  background-color: var(--loading-grey);
+  background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 60%
+    )
+    var(--loading-grey);
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  animation: 1.5s loading ease-in-out infinite;
+}
+@keyframes loading {
+  to {
+    background-position-x: -20%;
+  }
+}
+@media (max-width: 768px) {
+  .wrapper {
+    margin-top: 80px;
+  }
+  .randomQuestions {
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .user {
+    flex-direction: column;
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .ask,
+  .askbtn {
+    position: relative;
+    text-align: center;
+  }
+
+  .likesBtns {
+    justify-content: center;
+  }
+
+  .thumbs {
+    flex-direction: row;
+    padding: 10px;
+  }
+  .userQuestions {
+    max-width: 400px;
+    overflow-y: scroll;
+  }
+  .conditions {
+    font-size: 12px;
+  }
+  textarea {
+    width: 96.5%;
+  }
+}
+
+@media (max-width: 530px) {
+  .randomQuestions {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .userDet {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .input input {
+    display: none;
+  }
+  .communityHeadline {
+    display: none;
+  }
+  .ask,
+  .askbtn {
+    border: none;
+  }
+  .thumbs {
+    padding: 5px;
+  }
+}
+@media (max-width: 300px) {
+  .input input {
+    display: none;
+  }
+  .communityHeadline {
+    display: none;
+  }
+}

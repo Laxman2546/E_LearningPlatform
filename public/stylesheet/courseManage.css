@@ -1,0 +1,378 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+a {
+  all: unset;
+}
+:root {
+  --purple: #7808d0;
+  --gray: #000000;
+  --dark-gray: #333;
+  --light-gray: #8c8b8b;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--gray);
+  color: var(--dark-gray);
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+}
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --darkpurple: #9000ff;
+  --purple: #7808d0;
+  --gray: #f7f9fa;
+  --white: #ffff;
+  --black: #000;
+}
+html,
+body {
+  height: 100%;
+}
+
+a {
+  all: unset;
+  text-decoration: none;
+  width: 100%;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  transition: top 0.2s ease-in-out;
+  z-index: 99999;
+  border-bottom: 1px solid gray;
+  box-shadow: 0px 2px 5px 1px;
+}
+.Scroll {
+  display: none;
+}
+.logo img {
+  width: 60px;
+  height: 60px;
+  margin: 10px 10px;
+  border-radius: 50%;
+}
+
+.nav-items {
+  position: relative;
+  color: rgb(0, 0, 0);
+  font-family: "euclid_circular_a", "Arial", "Source Sans Pro", "Helvetica Neue",
+    "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.nav-main {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-main li {
+  margin: 0 20px;
+}
+
+.nav-main :hover {
+  color: #7808d0;
+}
+
+.nav-main a {
+  position: relative;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.nav-main a::before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -5px;
+  background-color: #7808d0;
+  transform: translatey(5px);
+  transition: 0.3s;
+}
+
+.nav-main a:hover::before {
+  width: 100%;
+  height: 2px;
+}
+
+.nav-main a.border::before {
+  color: #7808d0;
+  width: 100%;
+  height: 2px;
+}
+
+.icon {
+  width: 60px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.icon img {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid purple;
+  padding: 4px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+}
+.icon a:hover::before {
+  width: 0%;
+  height: 2px;
+}
+
+.ham {
+  color: var(--white);
+  position: relative;
+  z-index: 0;
+  left: 40px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -ms-user-select: none;
+  user-select: none;
+  display: none;
+}
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: #000000;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+}
+.ham6 .top {
+  stroke-dasharray: 40 172;
+}
+.ham6 .middle {
+  stroke-dasharray: 40 111;
+}
+.ham6 .bottom {
+  stroke-dasharray: 40 172;
+}
+.ham6.active .top {
+  stroke-dashoffset: -132px;
+}
+.ham6.active .middle {
+  stroke-dashoffset: -71px;
+}
+.ham6.active .bottom {
+  stroke-dashoffset: -132px;
+}
+#navbar {
+  height: 100px;
+  width: 100%;
+}
+
+.wrapper {
+  max-width: 1250px;
+  width: 90%;
+  border-radius: 8px;
+  overflow-y: scroll;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 40px;
+}
+
+.topBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 25px;
+  gap: 20px;
+  justify-content: center;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+}
+
+.heading h1 {
+  font-size: 2rem;
+  color: black;
+}
+
+.heading p {
+  font-size: 1.1rem;
+  color: var(--light-gray);
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.button button {
+  all: unset;
+  padding: 15px 20px;
+  background-color: var(--purple);
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar img {
+  width: 400px;
+  border-radius: 8px;
+}
+
+.first {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.first i {
+  color: var(--purple);
+}
+@media (width < 1000px) {
+  .wrapper {
+    width: 100%;
+    overflow-y: scroll;
+    flex-direction: column-reverse;
+  }
+  .header {
+    padding: 0;
+    width: 100%;
+    margin-top: 25px;
+    align-items: start;
+  }
+  .learnerOutcomes {
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 25px;
+  }
+  .topBar {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    overflow-y: scroll;
+  }
+  .header {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .middleBar {
+    flex-direction: column;
+    gap: 25px;
+    border-bottom: 1px sold gray;
+  }
+
+  .heading h1 {
+    max-width: 100%;
+    font-size: 1.5rem;
+  }
+
+  .heading p {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  .sidebar img {
+    max-width: 100%;
+  }
+  .button {
+    flex-direction: column;
+    align-items: start;
+  }
+  .button button {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    overflow-y: scroll;
+  }
+  .heading h1 {
+    font-size: 1.1 rem;
+  }
+
+  .middleBar p {
+    font-size: 0.75rem;
+  }
+
+  .button button {
+    padding: 12px 40px;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>studyLane</title>
+    <link rel="stylesheet" href="/stylesheet/register.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="image">
+        <img src="/images/registration.svg" alt="Login-illustartion" />
+      </div>
+      <form action="/create" method="post" class="register">
+        <div class="text">
+          <h1>Join Us</h1>
+          <p>Create your account to <br />Start new journey</p>
+        </div>
+        <% if (messages.success) { %>
+        <div class="notification" style="background-color: green">
+          <p style="color: white"><%= messages.success %></p>
+        </div>
+        <% }else if (messages.error) { %>
+        <div class="notification" style="background-color: red">
+          <p style="color: white"><%= messages.error %></p>
+        </div>
+        <% } %>
+        <div class="error" style="display: none">
+          <p style="color: white">this is an error</p>
+        </div>
+        <div class="inputWrapper inputEmail">
+          <input class="username" name="username" placeholder=" " required />
+          <label>Username</label>
+          <i class="ri-user-fill"></i>
+        </div>
+
+        <div class="inputWrapper inputPassword">
+          <input
+            type="email"
+            class="email"
+            name="email"
+            placeholder=" "
+            required
+          />
+          <label>Emailid</label>
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div class="inputWrapper inputPassword">
+          <input
+            type="password"
+            class="password"
+            name="password"
+            placeholder=" "
+            required
+          />
+          <label>Password</label>
+          <i class="fa-solid fa-eye-slash"></i>
+        </div>
+        <div class="forBtn">
+          <div class="button">
+            <button>Signup</button>
+          </div>
+        </div>
+        <span class="line"></span>
+        <p>or</p>
+        <div class="google">
+          <a href="/login/federated/google">
+            <button type="button" class="login-with-google-btn">
+              Sign in with Google
+            </button>
+          </a>
+        </div>
+        <div class="Register">
+          <p>Don"t have an account yet ?<a href="/">Login</a></p>
+        </div>
+      </form>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/c2025843a8.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/scripts/register.js"></script>
+  </body>
+</html>

@@ -1,0 +1,227 @@
+.nav {
+  position: fixed;
+  top: 0;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  transition: top 0.2s ease-in-out;
+  z-index: 99999;
+  border-bottom: 1px solid gray;
+}
+.Scroll {
+  display: none;
+}
+.logo img {
+  width: 60px;
+  height: 60px;
+  margin: 10px 10px;
+  border-radius: 50%;
+}
+
+.nav-items {
+  position: relative;
+  color: rgb(0, 0, 0);
+  font-family: "euclid_circular_a", "Arial", "Source Sans Pro", "Helvetica Neue",
+    "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.nav-main {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav-main li {
+  margin: 0 20px;
+}
+.nav-main :hover {
+  color: #7808d0;
+}
+
+.nav-main a {
+  position: relative;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+.nav-main a::before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -5px;
+  background-color: #7808d0;
+  transform: translatey(5px);
+  transition: 0.3s;
+}
+
+.nav-main a:hover::before {
+  width: 100%;
+  height: 2px;
+}
+
+.icon {
+  width: 60px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.icon img {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid purple;
+  padding: 4px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+}
+
+.ham {
+  color: white;
+  position: relative;
+  z-index: 0;
+  left: 40px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -ms-user-select: none;
+  user-select: none;
+  display: none;
+}
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: #000000;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+}
+.ham6 .top {
+  stroke-dasharray: 40 172;
+}
+.ham6 .middle {
+  stroke-dasharray: 40 111;
+}
+.ham6 .bottom {
+  stroke-dasharray: 40 172;
+}
+.ham6.active .top {
+  stroke-dashoffset: -132px;
+}
+.ham6.active .middle {
+  stroke-dashoffset: -71px;
+}
+.ham6.active .bottom {
+  stroke-dashoffset: -132px;
+}
+@media screen and (max-width: 990px) {
+  .ham {
+    display: block;
+    min-width: 100%;
+  }
+
+  .nav-main {
+    min-width: 100%;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 0.4s ease, opacity 0.4s ease;
+    z-index: 9999;
+  }
+
+  .nav-main.active {
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    z-index: 999999;
+  }
+
+  .nav-main li {
+    margin: 20px 0;
+    width: 100%;
+    text-align: center;
+    z-index: 999999;
+    cursor: pointer;
+  }
+  .nav-main button {
+    margin: 20px 0;
+    text-align: center;
+    z-index: 999999;
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 560px) {
+  .ham {
+    display: block;
+    min-width: 100%;
+  }
+
+  .nav-main {
+    min-width: 100%;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 0.4s ease, opacity 0.4s ease;
+    z-index: 9999;
+  }
+
+  .nav-main.active {
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    z-index: 999999;
+  }
+
+  .nav-main li {
+    margin: 20px 0;
+    width: 100%;
+    text-align: center;
+    z-index: 999999;
+    cursor: pointer;
+  }
+  .nav-main button {
+    margin: 20px 0;
+    text-align: center;
+    z-index: 999999;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= user.username %> Profile</title>
+    <link rel="stylesheet" href="../stylesheet/profile.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <%- include('userNavbar') %> <% if (messages.success) { %>
+    <div class="notification">
+      <p style="color: white"><%= messages.success %></p>
+    </div>
+    <% }else if (messages.error) { %>
+    <div class="notification">
+      <p><%= messages.error %></p>
+    </div>
+    <% } %>
+    <div class="upload">
+      <p>click save to upload the image</p>
+    </div>
+
+    <div class="wrapper">
+      <div class="dashboard">
+        <div class="dashboardTop">
+          <div class="navigation">
+            <div class="box2">
+              <div class="bottombox">
+                <div class="profileheadingLine"></div>
+                <div class="profileheadingLine2 descriptionLine"></div>
+                <div class="profileheadingLine3 descriptionLine"></div>
+              </div>
+            </div>
+            <div class="accountData">
+              <h2 class="text">Account center</h2>
+              <div class="options">
+                <div class="personalDetails">
+                  <i class="ri-user-line"></i>
+                  <p>Personal Details</p>
+                </div>
+                <div class="enrolledCourses">
+                  <i class="ri-book-open-line"></i>
+                  <p>Enrolled Courses</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="userMain">
+            <div class="userProfile">
+              <div class="picDetails">
+                <div class="profilepicLoader"></div>
+                <img
+                  src="<%= user.profileImage ? user.profileImage.data : '/images/default.png' %>"
+                />
+                <i class="ri-pencil-fill display" id="pencil"></i>
+              </div>
+              <div class="userDetails">
+                <div class="profileaddress">
+                  <div class="profileUsername descriptionLine"></div>
+                  <div class="profileEmail descriptionLine"></div>
+                </div>
+                <div class="userText">
+                  <h1><%= user.username %></h1>
+                </div>
+
+                <div class="contact">
+                  <small class="Semail"><%=user.email%></small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form
+          action="/profile/update"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="userNames">
+            <div class="inputfields">
+              <div class="Cname">
+                <label class="LName">Name</label>
+                <input
+                  spellcheck="false"
+                  type="name"
+                  value="<%=user.username%>"
+                  name="username"
+                />
+              </div>
+              <div class="Cemail">
+                <label class="Lemail">Emailid</label>
+                <input
+                  spellcheck="false"
+                  type="email"
+                  disabled=""
+                  id="email"
+                  value="<%=user.email%>"
+                  name="email"
+                />
+              </div>
+            </div>
+            <div class="inputfields2" name="occupation">
+              <div class="options2">
+                <label class="Occu">occupation</label>
+                <input
+                  class="email"
+                  placeholder="ex:student,working profession,faculty"
+                  name="occupation"
+                  value="<%=user.occupation%>"
+                />
+              </div>
+              <div class="Cemail address" name="address">
+                <label class="Lemail">Address</label>
+                <input
+                  class="email"
+                  placeholder="address"
+                  name="address"
+                  value="<%=user.address%>"
+                />
+              </div>
+            </div>
+            <div class="overlay">
+              <div class="popup">
+                <div class="userProfile">
+                  <div class="picDetails-popup">
+                    <img
+                      id="imagePreview"
+                      name="profileImage"
+                      src="<%= user.profileImage ? user.profileImage.data : '/images/default.png' %>"
+                      alt="Profile Image"
+                    />
+                  </div>
+                </div>
+                <div class="imageUploadBtns">
+                  <input
+                    type="file"
+                    id="fileInput"
+                    name="profileImage"
+                    class="file-upload"
+                  />
+                  <label for="fileInput" type="submit" class="custom-upload"
+                    >choose image</label
+                  >
+                  <button type="button" class="custom-upload" id="cancel">
+                    upload image
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="btns">
+              <div class="saveBtn">
+                <div class="saveSession">
+                  <button class="save" type="submit">
+                    save<i class="ri-save-fill"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="logoutBtn">
+                <div class="logoutSession">
+                  <button class="Logout" type="reset">
+                    <a href="/logout"
+                      >Logout
+                      <i class="ri-logout-box-r-line"></i>
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="enrolledCourses1" style="display: none">
+      <% enrolledCourses.forEach(course => { %>
+      <div class="courseDetails">
+        <div class="courseImage" name="courseImage">
+          <img class="coursePic" src="<%= course.courseImage %>" alt="" />
+        </div>
+        <div class="CourseTitle" name="title">
+          <h4><%= course.title %></h4>
+          <p class="description" name="description">
+            <%= course.description %>
+          </p>
+          <div class="details">
+            <p class="learners" name="enrolledAt">
+              Enrolled at: <%= course.enrolledAt %>
+            </p>
+            <p class="createdBy" name="enrolledAt">
+              Created by: <%= course.createdBy %>
+            </p>
+          </div>
+        </div>
+        <div class="courseBtn">
+          <form action="/profile/continue" method="post">
+            <input type="hidden" name="title" value="<%= course.title %>" />
+            <button type="submit" class="ContinueBtn">Continue Course</button>
+          </form>
+          <form action="/profile/unenroll" method="post">
+            <input type="hidden" name="title" value="<%= course.title %>" />
+            <button type="submit" class="LeaveBtn">Leave Course</button>
+          </form>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/c2025843a8.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../scripts/profile.js"></script>
+  </body>
+</html>

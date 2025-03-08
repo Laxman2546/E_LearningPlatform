@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyLane</title>
+    <link rel="stylesheet" href="../stylesheet/forgot.css" />
+  </head>
+  <body>
+    <% if (messages.success) { %>
+    <div class="notification">
+      <p style="color: white"><%= messages.success %></p>
+    </div>
+    <% }else if (messages.error) { %>
+    <div class="notification">
+      <p><%= messages.error %></p>
+    </div>
+    <% } %>
+    <div class="container">
+      <div class="image">
+        <img src="../images/forgot.svg" alt="forgot-illustartion" />
+      </div>
+      <form class="forgot" method="post" action="/forgot">
+        <div class="text">
+          <h1>Password Reset</h1>
+          <p>Enter your Emailid</p>
+        </div>
+
+        <div class="error" style="display: none">
+          <p style="color: white">this is an error</p>
+        </div>
+        <div class="inputWrapper inputEmail">
+          <input
+            type="email"
+            name="email"
+            class="email"
+            placeholder=" "
+            required
+          />
+          <label>Email</label>
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+
+        <div class="button">
+          <button>Reset password</button>
+        </div>
+        <span class="line"></span>
+        <div class="Register">
+          <p>Know your password? <a href="/">Signin</a></p>
+        </div>
+      </form>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/c2025843a8.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../scripts/forgot.js"></script>
+  </body>
+</html>

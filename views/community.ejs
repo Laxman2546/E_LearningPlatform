@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stylesheet/community.css" />
+  </head>
+
+  <body>
+    <div class="loader"></div>
+    <%- include('userNavbar') %>
+    <div class="wrapper overflow">
+      <% if (messages.success) { %>
+      <div class="notification">
+        <p style="color: rgb(0, 0, 0); background-color: red">
+          <%= messages.success %>
+        </p>
+      </div>
+      <% } else if (messages.error) { %>
+      <div class="notification" style="background-color: red; color: #000">
+        <p><%= messages.error %></p>
+      </div>
+      <% } %>
+      <div class="user">
+        <div class="userDet">
+          <div class="profile">
+            <div class="communityprofilepic"></div>
+            <img
+              src="<%= user.profileImage ? user.profileImage.data : '/images/default.png' %>"
+              alt="User  Profile Picture"
+              width="42px"
+              height="42px"
+            />
+          </div>
+          <div class="input">
+            <div class="inputField">
+              <input
+                type="text"
+                placeholder="Need help with a course or career advice? Ask here!"
+              />
+              <div class="communityQuestion">
+                <div class="communityHeadline descriptionLine"></div>
+              </div>
+            </div>
+            <div class="overlay click"></div>
+          </div>
+        </div>
+        <div class="ask click">
+          <div class="communityAsk descriptionLine"></div>
+          <i class="ri-questionnaire-fill"></i>
+          <button class="askbtn" type="submit">Ask</button>
+        </div>
+      </div>
+
+      <!-- Add Question Section -->
+      <div class="background display">
+        <div class="userQuestions">
+          <div class="closeBtn closed">
+            <i class="ri-close-large-line"></i>
+          </div>
+          <div class="heading">
+            <h3>Add Question</h3>
+          </div>
+          <div class="conditions">
+            <div class="conditionsHeading">
+              <h4>Follow these tips to get more answers</h4>
+              <div class="conditionsPara">
+                <ul>
+                  <li>Make the question straightforward and precise.</li>
+                  <li>Avoid adding any inappropriate or offensive text.</li>
+                  <li>
+                    Provide a clear description for better understanding of the
+                    question.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <form action="/community/addquestion" method="post">
+            <div class="questionBlock">
+              <div class="question">
+                <div class="title">
+                  <input
+                    type="text"
+                    name="questionTitle"
+                    placeholder="Title"
+                    required
+                    maxlength="100"
+                  />
+                </div>
+                <div class="description">
+                  <textarea
+                    name="questionDescription"
+                    rows="5"
+                    cols="80"
+                    placeholder="Description"
+                    required
+                    maxlength="1000"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="addbtns">
+                <div class="addquestion">
+                  <button type="submit">Add question</button>
+                </div>
+                <div class="cancelquestion closed">
+                  <button type="reset">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- All Questions Section -->
+      <div class="allquestions">
+        <% findQuestions.forEach((question) => { %>
+        <div class="questionsCard">
+          <div class="randomQuestions" data-question-id="<%= question._id %>">
+            <div class="randomUser">
+              <div class="randomuserPic">
+                <img
+                  src="<%= question.profileImage ? question.profileImage.data : '/images/default.png' %>"
+                  alt="User  Profile Picture"
+                  width="40px"
+                  height="40px"
+                />
+              </div>
+              <div class="randomuserDeatils">
+                <div class="randomuserName">
+                  <h4><%= question.username %></h4>
+                </div>
+                <div class="randomuserupdated">
+                  <p>
+                    <%= question.occupation ? question.occupation : "Student" %>
+                  </p>
+                  <span class="border"></span>
+                  <p>Posted on <%= question.createdAt %></p>
+                </div>
+              </div>
+            </div>
+            <div class="randomTitle">
+              <h3><%= question.questionTitle %></h3>
+              <p class="description">
+                <% if (question.questionDescription) { %> <%=
+                question.questionDescription.slice(0, 100) %> <% if
+                (question.questionDescription.length > 100) { %>
+                <button class="see-more-btn" onclick="toggleText(this)">
+                  See More
+                </button>
+                <span class="more-text" style="display: none">
+                  <%= question.questionDescription.slice(100) %>
+                  <button class="see-less-btn" onclick="toggleText(this)">
+                    See Less
+                  </button>
+                </span>
+                <% } %> <% } %>
+              </p>
+
+              <% if (!question.questionDescription) { %>
+              <p>No description available</p>
+              <% } %>
+            </div>
+            <div class="buttons">
+              <div class="allbtns">
+                <div class="thumbs">
+                  <div class="likesBtns">
+                    <div class="like">
+                      <i class="ri-thumb-up-line"></i>
+                    </div>
+                    <div class="count">
+                      <button>Like</button>
+                      <p>12.5k</p>
+                    </div>
+                  </div>
+                  <div class="dislike">
+                    <i class="ri-thumb-down-line"></i>
+                  </div>
+                </div>
+                <div class="comment comment-btn">
+                  <i class="ri-chat-3-line"></i>
+                  <p><%= question.commentCount %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="commentsDiv commentDisplay">
+            <form
+              class="commentForm"
+              action="/community/postcomment"
+              method="post"
+            >
+              <input
+                type="hidden"
+                name="questionId"
+                class="questionId"
+                value="<%= question._id %>"
+              />
+              <input
+                type="hidden"
+                name="comments"
+                value="<%= question.comment %>"
+              />
+
+              <div class="add">
+                <div class="img">
+                  <img
+                    src="<%= user.profileImage && user.profileImage.data ? user.profileImage.data : '/images/default.png' %>"
+                    alt="User Profile Picture"
+                    width="40px"
+                    height="40px"
+                  />
+                </div>
+                <div class="commentField">
+                  <div class="commentinputField">
+                    <input
+                      type="text"
+                      name="commentText"
+                      placeholder="Add a comment..."
+                    />
+                  </div>
+                  <div
+                    class="commentOverlay commentClick"
+                    style="background-color: black"
+                  ></div>
+                  <button class="commentOverlay commentClick" type="submit">
+                    Add comment
+                  </button>
+                </div>
+              </div>
+            </form>
+            <!-- <div class="allcomments" id="commentsList-<%= question._id %>">
+              <div class="commentTitle">
+                <div class="headingComments">
+                  <p>Comments</p>
+                </div>
+                <div class="cross">
+                  <i class="ri-close-fill"></i>
+                </div>
+              </div>
+              <span class="commentsBorder"></span>
+              <div class="all">
+                <% if (question.comments && question.comments.length > 0) { %>
+                <% question.comments.forEach(comment => { %>
+                <div class="commentUser">
+                  <div class="commentuserPic">
+                    <img
+                      src="<%= comment.profileImage.data %>"
+                      alt="profile pic"
+                      width="30px"
+                      height="30px"
+                    />
+                  </div>
+                  <div class="commentuserDeatils">
+                    <div class="commentUsername">
+                      <h4><%= comment.username %></h4>
+                    </div>
+                    <div class="commentDate">
+                      <p><%= comment.createdAt %></p>
+                    </div>
+                  </div>
+                  <div class="mainComment">
+                    <p><%= comment.commentText %></p>
+                  </div>
+                  <div class="commentActions">
+                    <button>Reply</button>
+                  </div>
+                </div>
+                <% }) %> <% } else { %>
+                <p>No comments yet.</p>
+                <% } %>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="../scripts/community.js"></script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Lane</title>
+    <link rel="stylesheet" href="../stylesheet/adminDashboard.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <%- include('adminnavbar') %> <% if (messages.success) { %>
+    <div class="notification success" id="notification success">
+      <p style="color: white; background-color: rgb(80, 161, 80)">
+        <%= messages.success %>
+      </p>
+    </div>
+    <% }else if (messages.error) { %>
+    <div class="notification error" id="notification error">
+      <p style="color: white; background-color: #ff2c2c">
+        <%= messages.error %>
+      </p>
+    </div>
+    <% } %>
+    <div class="wrapper">
+      <section class="section1">
+        <div class="heading">
+          <h1>Created Courses</h1>
+          <div class="search">
+            <input
+              class="input"
+              type="text"
+              placeholder="<%= admin.username %> admin search for a course"
+            />
+            <i class="ri-search-line" id="searchBtn"></i>
+            <i class="ri-close-line close closeBtn" id="closeBtn "></i>
+          </div>
+        </div>
+      </section>
+      <div class="background back">
+        <div class="popup popDisplay" id="popup">
+          <i class="ri-close-fill closeBtn close"></i>
+          <h1>Do you want to delete this course?</h1>
+          <p>Note: This will delete all the videos included</p>
+          <div class="buttons">
+            <form action="/course/delete" method="post">
+              <input type="hidden" id="courseTitle" name="title" value="" />
+              <button id="submit" class="removeCourse">Delete Course</button>
+            </form>
+            <button id="delete" class="close">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <% if (groupedCourses && Object.keys(groupedCourses).length > 0) { %> <%
+      for (const [category, courses] of Object.entries(groupedCourses)) { %>
+      <section class="courses">
+        <h1 class="coursesHeading"><%= category %></h1>
+        <i
+          class="fa-sharp-duotone fa-solid fa-circle-chevron-left"
+          id="leftArrow"
+        ></i>
+        <i
+          class="fa-sharp-duotone fa-solid fa-circle-chevron-right"
+          id="rightArrow"
+        ></i>
+        <div class="coursesAll container">
+          <% courses.forEach((course) => { %>
+          <div class="courseDetails">
+            <div class="courseImage">
+              <img
+                class="coursePic"
+                src="<%= course.courseImage %>"
+                alt="<%= course.title %>"
+              />
+            </div>
+            <div class="CourseTitle">
+              <h4><%= course.title %></h4>
+              <p class="description"><%= course.description %></p>
+              <div class="duraauth">
+                <p class="learners">insrtuctor: <%= course.createdBy %></p>
+                <p class="learners">Duration: <%= course.duration %></p>
+              </div>
+              <p class="learners">Uploaded: <%= course.createdAt %></p>
+            </div>
+            <div class="courseBtn">
+              <form class="form" action="/course/manage" method="post">
+                <input type="hidden" name="title" value="<%= course.title %>" />
+                <button type="submit" class="Btn">Manage course</button>
+              </form>
+              <input type="hidden" name="title" value="<%= course.title %>" />
+              <button type="submit" class="Btn delete">Delete course</button>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </section>
+      <% } %> <% } else { %>
+      <p>No courses available.</p>
+      <% } %>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/c2025843a8.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../scripts/adminCourses.js"></script>
+  </body>
+</html>

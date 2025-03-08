@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>htmlBasics</title>
+    <link rel="stylesheet" href="../stylesheet/courseManage.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <%- include('adminnavbar') %>
+    <div class="wrapper">
+      <div class="topBar">
+        <div class="header">
+          <div class="heading">
+            <h1><%= courseManage.title %></h1>
+            <p><%= courseManage.description %></p>
+            <p class="instructor" style="font-size: 0.9rem">
+              Instructor:
+              <span style="text-decoration: underline">
+                <%= courseManage.createdBy %></span
+              >
+            </p>
+
+            <div class="button">
+              <form class="form" action="/course/edit" method="post">
+                <input type="hidden" name="courseId" value="<%= courseId %>" />
+                <button type="submit">Edit course</button>
+              </form>
+
+              <form class="form" action="/course/upload" method="post">
+                <input type="hidden" name="courseId" value="<%= courseId %>" />
+                <button type="submit">Upload videos</button>
+              </form>
+              <form class="form" action="/video/coursedetails" method="post">
+                <input type="hidden" name="courseId" value="<%= courseId %>" />
+                <button type="submit">Course details</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <img src=" <%= courseManage.courseImage %>" alt="" />
+      </div>
+    </div>
+    <script src="../learning/htmlbasics.js"></script>
+  </body>
+</html>

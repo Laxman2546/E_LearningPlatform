@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Course</title>
+    <link rel="stylesheet" href="../stylesheet/createCourse.css" />
+  </head>
+  <body>
+    <%- include('adminnavbar') %>
+    <div class="wrapper">
+      <% if (messages.success) { %>
+      <div class="notification">
+        <p style="color: white; background-color: rgb(80, 161, 80)">
+          <%= messages.success %>
+        </p>
+      </div>
+      <% }else if (messages.error) { %>
+      <div class="notification">
+        <p style="color: white; background-color: #ff2c2c">
+          <%= messages.error %>
+        </p>
+      </div>
+      <% } %>
+      <div class="top">
+        <div class="welcome">
+          <h1>hello,<%= admin.username %></h1>
+        </div>
+      </div>
+      <form
+        action="/course/newcourse"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="inputfields">
+          <div class="heading">
+            <h3>Create a course</h3>
+          </div>
+          <div class="course category">
+            <label for="category">category</label>
+            <select name="category">
+              <option value="webdevelopment">webdevelopment</option>
+              <option value="MERN Stack">MERN Stack</option>
+              <option value="Machine Learning">Machine Learning</option>
+              <option value="Arificial Intelligence">
+                Arificial Intelligence
+              </option>
+            </select>
+          </div>
+          <div class="course title">
+            <label for="title ">Course title</label>
+            <input type="text" name="title" />
+          </div>
+          <div class="course Description">
+            <label for="Description">Course Description</label>
+            <input type="text" name="description" />
+          </div>
+          <div class="course Image">
+            <label for="Description">Course Image</label>
+            <input type="file" name="courseImage" />
+          </div>
+          <div class="course duration">
+            <label for="Description">Course Duration</label>
+            <input type="text" name="duration" />
+          </div>
+          <div class="course Createdby">
+            <label for="Description">Course Createdby</label>
+            <input type="text" name="createdBy" />
+          </div>
+          <div class="submit">
+            <button type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../scripts/createcourse.js"></script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin profile</title>
+    <link rel="stylesheet" href="../stylesheet/profile.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <%- include('adminnavbar') %>
+    <div class="wrapper">
+      <div class="dashboard">
+        <div class="dashboardTop">
+          <div class="navigation">
+            <h2 class="text">Account center</h2>
+            <div class="options">
+              <div class="personalDetails">
+                <i class="ri-user-line"></i>
+                <p>Personal Details</p>
+              </div>
+            </div>
+          </div>
+          <div class="userMain">
+            <div class="userProfile">
+              <div class="picDetails">
+                <img src="../images/default.png" />
+              </div>
+              <div class="userDetails">
+                <div class="userText">
+                  <h1><%= admin.username %></h1>
+                </div>
+
+                <div class="contact">
+                  <small class="Semail"><%= admin.email %></small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form action="#" method="post" enctype="multipart/form-data">
+          <div class="userNames">
+            <div class="inputfields">
+              <div class="Cname">
+                <label class="LName">Admin Name</label>
+                <input
+                  style="margin-top: 15px"
+                  spellcheck="false"
+                  disabled=""
+                  type="name"
+                  value="<%= admin.username %>"
+                  name="username"
+                />
+              </div>
+              <div class="Cemail">
+                <label class="Lemail">Emailid</label>
+                <input
+                  style="margin-top: 15px"
+                  spellcheck="false"
+                  type="email"
+                  disabled=""
+                  id="email"
+                  value="<%= admin.email %>"
+                  name="email"
+                />
+              </div>
+            </div>
+            <div class="btns">
+              <div class="saveBtn">
+                <div class="saveSession">
+                  <button class="save" type="submit">
+                    save<i class="ri-save-fill"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="logoutBtn">
+                <div class="logoutSession">
+                  <button class="Logout" type="reset">
+                    <a href="/admin/logout">Logout</a>
+                    <i class="ri-logout-box-r-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

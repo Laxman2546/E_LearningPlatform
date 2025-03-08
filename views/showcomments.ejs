@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comment Section</title>
+    <link rel="stylesheet" href="../stylesheet/commentSection.css" />
+  </head>
+  <body>
+    <%- include('userNavbar') %>
+    <div class="comments-container">
+      <div class="question-header">
+        <div class="question-profile">
+          <img
+            src="<%= question.profileImage && question.profileImage.data ? question.profileImage.data : '/images/default.png' %>"
+            alt="Questioner's Profile"
+            class="questioner-pic"
+          />
+          <div>
+            <h2 class="question-title"><%= question.questionTitle %></h2>
+            <p class="question-meta">
+              <span class="question-user"
+                >Posted by: <strong><%= question.username %></strong></span
+              >
+              <span class="question-date">
+                | Date: <%= question.createdAt %></span
+              >
+            </p>
+          </div>
+        </div>
+        <p class="question-description"><%= question. questionDescription %></p>
+      </div>
+      <form action="/community/postcomment" id="commentForm" method="post">
+        <div class="add-comment-section">
+          <input
+            type="hidden"
+            name="questionId"
+            class="questionId"
+            value="<%= question._id %>"
+          />
+          <img
+            src="<%= user.profileImage && user.profileImage.data ? user.profileImage.data : '/images/default.png' %>"
+            alt="User Profile Picture"
+            width="40px"
+            height="40px"
+            class="profile-pic"
+          />
+          <textarea
+            class="comment-input"
+            id="input"
+            name="commentText"
+            placeholder="Share your thoughts..."
+          ></textarea>
+          <button class="submit-comment-btn" type="submit" id="submitBtn">
+            Post
+          </button>
+        </div>
+      </form>
+      <!-- Comments List -->
+      <div class="comments-list">
+        <% if (comments && comments.length > 0) { %> <%
+        comments.forEach((comment) => { %>
+        <div class="comment-item">
+          <img
+            src="<%= comment.profileImage && comment.profileImage.data ? comment.profileImage.data : '/images/default.png' %>"
+            alt="User Profile"
+            class="comment-pic"
+          />
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="user-name"><%= comment.username %></span>
+              <span class="comment-timestamp"><%= comment.createdAt %></span>
+            </div>
+            <p class="comment-text"><%= comment.commentText %></p>
+            <div class="comment-actions">
+              <button class="like-btn">Like</button>
+              <button class="reply-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+        <% }) %> <% } else { %>
+        <p>No comments yet.</p>
+        <% } %>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("commentForm");
+        const input = document.getElementById("input");
+
+        form.addEventListener("submit", (e) => {
+          if (input.value.trim() === "") {
+            e.preventDefault();
+            alert("Comment cannot be empty!");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

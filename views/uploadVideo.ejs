@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Course</title>
+    <link rel="stylesheet" href="../stylesheet/uploadVideo.css" />
+  </head>
+  <body>
+    <%- include('adminnavbar') %>
+    <div class="container">
+      <div class="form-header">
+        <h1>Upload a Video</h1>
+        <p>Fill in the details below to add Video.</p>
+      </div>
+      <form
+        action="/video/videoDetails"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="form-fields">
+          <input type="hidden" name="courseId" value="<%= courseId %>" />
+          <div class="input-group">
+            <input
+              type="hidden"
+              name="title"
+              value="<%= courseUpload.title %>"
+            />
+            <label for="title">Course Title</label>
+            <input
+              type="hidden"
+              name="videoTitle"
+              value="<%= courseUpload.title %>"
+              placeholder="Enter course title"
+            />
+            <input
+              type="text"
+              name="hititle"
+              disabled=""
+              value="<%= courseUpload.title %>"
+              placeholder="Enter course title"
+            />
+          </div>
+          <div class="input-group">
+            <label for="videoHeading">Video Title</label>
+            <input type="text" name="videoHeading" placeholder="videoTitle" />
+          </div>
+          <div class="input-group">
+            <label for="description">Course Overview</label>
+            <textarea
+              name="overview"
+              placeholder="Write a short description"
+            ></textarea>
+          </div>
+          <div class="input-group">
+            <label for="video">Video URL</label>
+            <input
+              type="text"
+              name="videoLink"
+              placeholder="Paste video link here"
+            />
+          </div>
+          <div class="input-group">
+            <label for="videoImage">Video Thumbnail</label>
+            <input type="file" name="videoImage" />
+          </div>
+          <div class="input-group">
+            <label for="author">Author Name</label>
+            <input
+              type="hidden"
+              name="createdBy"
+              placeholder="Enter author name"
+              value="<%= courseUpload.createdBy %>"
+            />
+            <input
+              type="text"
+              disabled=""
+              name="NanicreatedBy"
+              placeholder="Enter author name"
+              value="<%= courseUpload.createdBy %>"
+            />
+          </div>
+          <div class="input-group">
+            <label for="duration">Duration (in minutes)</label>
+            <input
+              type="text"
+              name="duration"
+              placeholder="Enter video duration"
+            />
+          </div>
+          <div class="input-group">
+            <label for="rating">Rating</label>
+            <input
+              type="text"
+              name="rating"
+              placeholder="rating for the course out of 5"
+            />
+          </div>
+          <div class="input-group language">
+            <label for="language">Language</label>
+            <input type="text" name="language" placeholder="Enter language" />
+          </div>
+        </div>
+        <div class="submit">
+          <button type="submit">Add video</button>
+        </div>
+      </form>
+    </div>
+    <script src="../scripts/uploadVideo.js"></script>
+  </body>
+</html>
