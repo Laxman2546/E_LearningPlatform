@@ -1000,7 +1000,7 @@ p {
   color: white;
   border: none;
   box-shadow: 0 0 20px #eee;
-  border-radius: 15px;
+
   display: block;
   cursor: pointer;
 }
@@ -1008,6 +1008,7 @@ p {
 .outBtn:hover {
   background-position: right center;
   color: #fff;
+  border-radius: 25px;
   text-decoration: none;
 }
 
@@ -1502,7 +1503,7 @@ a {
     background-size: 200% auto;
     color: white;
     box-shadow: 0 0 20px #eee;
-    border-radius: 10px;
+
     display: block;
     z-index: 999;
   }
@@ -1510,6 +1511,7 @@ a {
   .outBtn:hover {
     background-position: right center;
     color: #fff;
+    border-radius: 25px;
     text-decoration: none;
   }
   .newsLetter {
@@ -1775,13 +1777,13 @@ a {
     background-size: 200% auto;
     color: white;
     box-shadow: 0 0 20px #eee;
-    border-radius: 10px;
     display: block;
   }
 
   .outBtn:hover {
     background-position: right center;
     color: #fff;
+    border-radius: 25px;
     text-decoration: none;
   }
   .newsLetter {
@@ -2081,13 +2083,13 @@ a {
     background-size: 200% auto;
     color: white;
     box-shadow: 0 0 20px #eee;
-    border-radius: 10px;
     display: block;
   }
 
   .outBtn:hover {
     background-position: right center;
     color: #fff;
+    border-radius: 25px;
     text-decoration: none;
   }
   .newsLetter {
