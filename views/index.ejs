@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+
+    <title>study Lane</title>
+    <link rel="stylesheet" href="../stylesheet/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="nav">
+        <div class="logo">
+          <a href="index.html">
+            <img
+              src="../images/final.png"
+              width="30px;"
+              height="30px"
+              alt="logo"
+            />
+          </a>
+        </div>
+        <div class="nav-items">
+          <ul class="nav-main">
+            <li>
+              <div class="courseScroll" onclick="autoscroll()">Courses</div>
+            </li>
+            <li>
+              <a href="#ebooks" class="nav-link" onclick="autoscroll2()"
+                >Features</a
+              >
+            </li>
+            <li>
+              <a href="#skilltest" class="nav-link" onclick="autoscroll3()"
+                >Learners</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="nav-link" onclick="autoscroll4()"
+                >Contact</a
+              >
+            </li>
+            <a style="color: white" href="/login">
+              <button class="login">Login</button>
+            </a>
+          </ul>
+
+          <span
+            ><svg
+              class="ham ham6"
+              onclick="toggleMenu()"
+              viewBox="0 0 100 100"
+              width="80"
+            >
+              <path
+                class="line top"
+                d="m 30,33 h 40 c 13.100415,0 14.380204,31.80258 6.899646,33.421777 -24.612039,5.327373 9.016154,-52.337577 -12.75751,-30.563913 l -28.284272,28.284272"
+              />
+              <path
+                class="line middle"
+                d="m 70,50 c 0,0 -32.213436,0 -40,0 -7.786564,0 -6.428571,-4.640244 -6.428571,-8.571429 0,-5.895471 6.073743,-11.783399 12.286435,-5.570707 6.212692,6.212692 28.284272,28.284272 28.284272,28.284272"
+              />
+              <path
+                class="line bottom"
+                d="m 69.575405,67.073826 h -40 c -13.100415,0 -14.380204,-31.80258 -6.899646,-33.421777 24.612039,-5.327373 -9.016154,52.337577 12.75751,30.563913 l 28.284272,-28.284272"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <section class="section1">
+        <div class="text">
+          <h1 class="hero h1">
+            Empower Your <span style="color: #7808d0">Learning </span>
+            journey
+          </h1>
+
+          <p class="herop">
+            Levelup your career with our courses and tutorials. Learn without
+            limits. Learn today's most in-demand skills with our free online
+            courses
+          </p>
+          <div class="buttons">
+            <button
+              href="#"
+              class="button"
+              style="--clr: #7808d0"
+              onclick="autoscroll()"
+            >
+              <span class="button__icon-wrapper">
+                <svg
+                  viewBox="0 0 14 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="button__icon-svg"
+                  width="10"
+                >
+                  <path
+                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+
+                <svg
+                  viewBox="0 0 14 15"
+                  fill="none"
+                  width="10"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="button__icon-svg button__icon-svg--copy"
+                >
+                  <path
+                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </span>
+              Explore All
+            </button>
+            <a href="/register">
+              <button class="btn-2">
+                <span>Signup</span>
+              </button>
+            </a>
+          </div>
+        </div>
+        <div class="image1">
+          <img class="illus" src="../images/hero.svg" alt="illustration" />
+        </div>
+      </section>
+      <section>
+        <div class="academic">
+          <h1 class="trust">
+            <span class="highlight">Trusted by 100+</span> Academic & Employment
+            Partners
+          </h1>
+          <div class="marquee marquee--8">
+            <img
+              class="marquee__item"
+              src="../images/amazon.png"
+              width="50"
+              height="50"
+              alt=""
+            />
+            <img
+              class="marquee__item"
+              src="../images/coinbasse.png"
+              width="50"
+              height="50"
+              alt=""
+            />
+            <img
+              class="marquee__item"
+              src="../images/ebay.png"
+              width="50"
+              height="50"
+              alt=""
+            />
+            <img
+              class="marquee__item"
+              src="../images/fb.png"
+              width="50"
+              height="50"
+              alt=""
+            />
+            <img
+              class="marquee__item"
+              src="../images/wordpress.png"
+              width="50"
+              height="50"
+              alt=""
+            />
+            <img
+              class="marquee__item"
+              src="../images/framer.png"
+              width="50"
+              height="50"
+              alt=""
+            />
+            <img
+              class="marquee__item"
+              src="../images/grammar.png"
+              width="50"
+              height="50"
+              alt=""
+            />
+          </div>
+        </div>
+      </section>
+      <section class="featu" id="featuresPage">
+        <h1 class="heading" style="color: #7808d0">
+          Land your first job with our Learning Paths!
+        </h1>
+        <div class="cards">
+          <div class="textbox">
+            <div class="program program1" onclick="toggle(this , 0, event)">
+              <h3>Stuck to Choose the Right Path For Your Career ?</h3>
+              <p>
+                Ask our Jarvis Ai trained for expertise solutions on career
+                guidance and more
+              </p>
+            </div>
+            <div class="program program2" onclick="toggle(this , 1, event)">
+              <h3>Learn & Gain Expertise at Your Own Pace</h3>
+              <p>
+                On your computer, tablet or phone, online courses make learning
+                flexible to fit your busy life.
+              </p>
+            </div>
+            <div class="program program3" onclick="toggle(this , 2, event)">
+              <h3>Stand Out in Your Field</h3>
+              <p>
+                Use the knowledge and skills you have gained to drive impact at
+                work and grow your career.
+              </p>
+            </div>
+            <div class="program program4" onclick="toggle(this , 3, event)">
+              <h3>Discover Free University Courses</h3>
+              <p>
+                Unlock exclusive learning opportunities with free courses from
+                top universities.
+              </p>
+            </div>
+          </div>
+          <div class="images">
+            <img
+              class="pictures image2"
+              style="display: none"
+              width="300px"
+              height="300px"
+              src="../images/section2/searching.svg"
+              alt="searching"
+            />
+            <img
+              class="pictures image3"
+              style="display: none"
+              width="300px"
+              height="300px"
+              src="../images/section2/college.svg"
+              alt="gain"
+            />
+            <img
+              class="pictures image4"
+              style="display: none"
+              width="300px"
+              height="300px"
+              src="../images/section2/carrer.svg"
+              alt="career"
+            />
+            <img
+              class="pictures image5"
+              style="display: none"
+              width="300px"
+              height="300px"
+              src="../images/section2/university.svg"
+              alt="university"
+            />
+          </div>
+        </div>
+      </section>
+      <section class="courses" id="coursePage">
+        <div class="courseHeading1">
+          <h2>Explore Courses</h2>
+        </div>
+        <i
+          class="fa-sharp-duotone fa-solid fa-circle-chevron-left"
+          id="leftArrow"
+        ></i>
+        <i
+          class="fa-sharp-duotone fa-solid fa-circle-chevron-right"
+          id="rightArrow"
+        ></i>
+        <div class="coursesAll">
+          <div class="courseDetails"></div>
+        </div>
+      </section>
+      <section class="testnomials" id="learnersPage">
+        <div class="learners">
+          <div class="learnersHead">
+            <h2>
+              Hear from Our<br />
+              <span style="color: #7808d0"> Learners</span>
+            </h2>
+          </div>
+          <div class="people">
+            <div class="people1">
+              <img
+                class="test people"
+                src="../images/testnomials/testimonial-person2.png"
+              />
+              <p class="test Para">
+                This platform's structure and guidance helped me stay focused
+                and complete my course in record time. The experience was
+                seamless!
+              </p>
+              <p class="test det"><i>— Anand.P, Web Development Student</i></p>
+            </div>
+            <div class="people2">
+              <img
+                class="test people"
+                src="../images/testnomials/testimonial-person1.png"
+              />
+              <p class="test Para">
+                I never thought online learning could be this effective. The
+                interactive quizzes and progress tracking kept me motivated all
+                the way.
+              </p>
+              <p class="test det"><i>— Priya S., Data Science Learner</i></p>
+            </div>
+            <div class="people3">
+              <img
+                class="test people"
+                src="../images/testnomials/testimonial-person3.jpeg"
+              />
+              <p class="test Para">
+                The quality of resources and supportive community make this
+                platform one of the best learning experiences I've had
+              </p>
+              <p class="test det"><i>— Alex M., Graphic Design Student</i></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="outcomes">
+        <div class="outImage">
+          <img src="../images/outcomes/1.svg" alt="illustration" />
+        </div>
+        <div class="outText">
+          <h1>
+            Learner Outcomes on <span style="color: #7808d0">Study Lane</span>
+          </h1>
+          <p>
+            <strong>77% of learners report career benefits</strong>, such as new
+            skills, increased pay, and new job opportunities.
+          </p>
+          <button class="outBtn"><a href="/register">join now</a></button>
+        </div>
+      </section>
+
+      <section class="footer">
+        <footer class="footer">
+          <div class="footer-content">
+            <div class="footer-logo">
+              <h2>StudyLane</h2>
+              <p style="color: rgb(147, 146, 146)">where the new paths begin</p>
+            </div>
+
+            <div class="footer-links" id="contactPage">
+              <h3 style="text-decoration: underline">Quick Links</h3>
+              <ul>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Support</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-social">
+              <h3>Follow Us</h3>
+              <div class="social-icons">
+                <a href="#" aria-label="Facebook"
+                  ><i class="fab fa-facebook"></i
+                ></a>
+                <a href="#" aria-label="Twitter"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a href="#" aria-label="Instagram"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a href="#" aria-label="LinkedIn"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p style="color: rgb(147, 146, 146)">
+              &copy; 2024 StudyLane. All Rights Reserved.
+            </p>
+            <p style="color: #7808d0">
+              made with<i class="fa-solid fa-heart" style="color: #b32929"></i
+              >by Lakshman
+            </p>
+          </div>
+        </footer>
+      </section>
+    </div>
+    <script src="../scripts/indexScript.js"></script>
+  </body>
+</html>

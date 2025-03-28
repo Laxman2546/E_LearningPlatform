@@ -33,12 +33,10 @@
               class="<%= message.sender === 'User' ? 'userDet' : 'aitext' %>"
             >
               <p><%= message.message %></p>
-              <!-- 'text' should be 'message' based on your schema -->
             </div>
           </div>
           <% }); %>
         </div>
-        <!-- Wrap the input and button in a form to handle the submission -->
         <form action="/generative/chat" method="post">
           <div class="input">
             <textarea

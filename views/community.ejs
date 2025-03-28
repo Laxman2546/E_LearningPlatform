@@ -56,8 +56,6 @@
           <button class="askbtn" type="submit">Ask</button>
         </div>
       </div>
-
-      <!-- Add Question Section -->
       <div class="background display">
         <div class="userQuestions">
           <div class="closeBtn closed">
@@ -167,26 +165,12 @@
               <% } %>
             </div>
             <div class="buttons">
-              <div class="allbtns">
-                <div class="thumbs">
-                  <div class="likesBtns">
-                    <div class="like">
-                      <i class="ri-thumb-up-line"></i>
-                    </div>
-                    <div class="count">
-                      <button>Like</button>
-                      <p>12.5k</p>
-                    </div>
-                  </div>
-                  <div class="dislike">
-                    <i class="ri-thumb-down-line"></i>
-                  </div>
-                </div>
+              <form action="/community/postcomment" method="post">
                 <div class="comment comment-btn">
                   <i class="ri-chat-3-line"></i>
                   <p><%= question.commentCount %></p>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
           <div class="commentsDiv commentDisplay">

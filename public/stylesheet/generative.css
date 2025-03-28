@@ -91,7 +91,15 @@ form {
 .inputField:focus {
   box-shadow: 0 4px 20px rgba(173, 0, 249, 0.15);
 }
-
+.startBtn {
+  all: unset;
+  display: flex;
+  text-align: center;
+  padding: 15px 35px;
+  background-color: blueviolet;
+  color: #fff;
+  border-radius: 50px;
+}
 .arrow {
   position: absolute;
   right: 20px;
@@ -128,4 +136,66 @@ form {
 .notification p {
   font-size: 17px;
   padding: 15px 25px;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 150px;
+  height: 25px;
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  border: none;
+  cursor: pointer;
+  background-color: var(--clr);
+  color: #fff;
+  border-radius: 5rem;
+  font-weight: 600;
+  gap: 0.25rem;
+  padding: 1.5rem;
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.3s;
+  z-index: 99999;
+}
+
+.button__icon-wrapper {
+  z-index: 999999;
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  position: relative;
+  color: var(--clr);
+  background-color: #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.button:hover {
+  background-color: #000;
+}
+
+.button:hover .button__icon-wrapper {
+  color: #000;
+}
+
+.button__icon-svg--copy {
+  position: absolute;
+  transform: translate(-150%, 150%);
+}
+
+.button:hover .button__icon-svg:first-child {
+  transition: transform 0.3s ease-in-out;
+  transform: translate(150%, -150%);
+}
+
+.button:hover .button__icon-svg--copy {
+  transition: transform 0.3s ease-in-out 0.1s;
+  transform: translate(0);
 }

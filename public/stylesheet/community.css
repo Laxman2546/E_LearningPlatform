@@ -1,7 +1,11 @@
 :root {
   --loading-grey: #b7b7b7;
 }
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html,
 body {
   height: 100%;
@@ -28,7 +32,7 @@ a {
 }
 .user {
   padding: 10px;
-  height: 80px;
+  height: 100px;
   box-shadow: 1px 3px 5px 2px rgba(0, 0, 0, 0.379);
   color: rgb(39, 39, 39);
   position: relative;
@@ -128,6 +132,7 @@ a {
   gap: 0;
   margin-top: 20px;
   border-radius: 5px;
+  padding: 15px;
 }
 .randomuserPic img {
   border: 2px solid rgba(0, 0, 0, 0.339);
@@ -135,14 +140,13 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translatey(8px);
 }
 .randomUser {
   display: flex;
   flex-direction: row;
   gap: 8px;
-  padding: 0px 18px;
   align-items: start;
+  margin-bottom: 10px;
 }
 .randomuserDetails {
   display: flex;
@@ -152,10 +156,10 @@ a {
 .randomTitle {
   word-wrap: break-word;
   text-wrap: wrap;
-  padding: 0px 18px;
+  padding: 0px 20px;
+  margin-left: 28px;
 }
 .randomuserName h4 {
-  height: 0;
   display: flex;
   align-items: center;
 }
@@ -163,55 +167,24 @@ a {
   display: flex;
   flex-direction: row;
   gap: 5px;
-  transform: translateY(-15px);
 }
 .border {
   width: 2px;
   height: 20px;
   background-color: gray;
-  transform: translateY(15px);
 }
-.buttons .allbtns {
+.buttons {
   display: flex;
-  padding: 0px 18px;
+  padding: 0px 45px;
   flex-direction: row;
   gap: 5px;
+  margin-top: 15px;
 }
-.likesBtns {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: center;
-  cursor: pointer;
-}
-.likesBtns button {
-  all: unset;
-}
-.thumbs {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  height: 15px;
-  padding: 9px;
-  align-items: start;
-  border: 1px solid rgba(143, 143, 143, 0.516);
-  border-radius: 25px;
-}
-.count {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  position: relative;
-  transform: translateY(-15px);
-}
-.like {
-  transform: translateY(-15px);
-}
+
 .comment {
   display: flex;
   flex-direction: row;
   align-items: center;
-  transform: translateY(-8px);
   cursor: pointer;
 }
 .background {
@@ -382,7 +355,7 @@ textarea {
   transform: translateY(5px);
 }
 .add {
-  width: 92.5%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   gap: 5px;
@@ -568,7 +541,7 @@ textarea {
   background-color: #fffcfc;
 }
 .communityHeadline {
-  width: 420px;
+  width: 380px;
   height: 30px;
   border-radius: 12px;
 }
@@ -584,7 +557,7 @@ textarea {
   z-index: 99999;
 }
 .communityQuestionsLoader {
-  width: 470px;
+  width: 400px;
   color: rgb(39, 39, 39);
   background-color: rgb(255, 255, 255);
   border: 1px solid rgba(128, 128, 128, 0.523);
@@ -611,7 +584,6 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translatey(8px);
 }
 .dataLoader {
   display: flex;

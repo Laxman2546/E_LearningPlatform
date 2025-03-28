@@ -15,7 +15,7 @@
     <div id="navbar">
       <div class="nav">
         <div class="logo">
-          <a href="index.html">
+          <a href=<%= user.username ? "/courses" : "/" %>>
             <img
               src="/images/final.png"
               width="30px;"
@@ -31,7 +31,6 @@
             </li>
             <li><a href="/community/page" class="nav-link">Community</a></li>
             <li><a href="/generative/jarvis" class="nav-link">Jarvis AI</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
             <div class="icon">
               <a href="/profile" class="profile">
                 <abbr title="profile" style="text-decoration: none">

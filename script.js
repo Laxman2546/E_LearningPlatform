@@ -94,6 +94,10 @@ function isloggedin(req, res, next) {
 
 // Routes
 app.get("/", (req, res) => {
+  res.render("index");
+});
+
+app.get("/login", (req, res) => {
   res.render("login");
 });
 
@@ -136,7 +140,7 @@ app.get("/courses", isloggedin, async (req, res) => {
   } catch (err) {
     console.error("Error fetching user data:", err);
     req.flash("error", "An error occurred while loading courses.");
-    res.redirect("/");
+    res.redirect("/login");
   }
 });
 
@@ -146,7 +150,7 @@ app.get("/profile", isloggedin, async (req, res) => {
     const user = await userModel.findOne({ email });
     if (!user) {
       req.flash("error", "User not found.");
-      return res.redirect("/");
+      return res.redirect("/login");
     }
     const enrolledCourses = await enrolledModel.find({ userEmail: email });
     if (user.profileImage && user.profileImage.data) {
@@ -406,7 +410,7 @@ const emailGenerator = (user, otp) => {
           border-radius: 8px;
           margin-top: 10px;
         ">
-          [${otp}]
+          ${otp}
         </div>
         <p style="font-size: 14px; line-height: 1.6; margin-top: 20px; color: #555;">
           This OTP is valid for the next <strong>15 minutes</strong>. Please do not share it with anyone to ensure your account’s security.
@@ -441,7 +445,6 @@ app.get("/reset", (req, res) => {
   res.render("resetpassword");
 });
 
-// Route to handle the forgot password form
 app.post("/forgot", async (req, res) => {
   const { email } = req.body;
   const user = await userModel.findOne({ email: email });
@@ -568,8 +571,6 @@ app.post("/check", (req, res) => {
     req.flash("error", "OTP has expired. Please request a new one.");
     return res.redirect("/forgot");
   }
-
-  // Ensure `otp` is parsed as an integer (if necessary)
   if (parseInt(otp, 10) === storedOtp) {
     delete otpStorage[email];
     console.log("from done", email);
@@ -597,10 +598,10 @@ app.post("/passwordChange", async (req, res) => {
   );
   if (!user) {
     req.flash("error", "something went wrong");
-    res.redirect("/");
+    res.redirect("/login");
   }
   req.flash("success", "Password reset successfully!");
-  res.redirect("/");
+  res.redirect("/login");
 });
 // Login route
 app.post("/login", async (req, res) => {
@@ -610,13 +611,13 @@ app.post("/login", async (req, res) => {
     const user = await userModel.findOne({ email });
     if (!user) {
       req.flash("error", "Invalid email or password.");
-      return res.redirect("/");
+      return res.redirect("/login");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       req.flash("error", "Invalid email or password.");
-      return res.redirect("/");
+      return res.redirect("/login");
     }
 
     const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, {
@@ -629,13 +630,13 @@ app.post("/login", async (req, res) => {
   } catch (err) {
     console.error("Error during login:", err);
     req.flash("error", "An error occurred during login.");
-    res.redirect("/");
+    res.redirect("/login");
   }
 });
 // Logout route
 app.get("/logout", (req, res) => {
   res.cookie("token", "", { expires: new Date(0), httpOnly: true });
-  res.redirect("/");
+  res.redirect("/login");
 });
 
 // Start the server
