@@ -164,7 +164,7 @@ form {
 }
 
 .button__icon-wrapper {
-  z-index: 999999;
+  z-index: 99990;
   flex-shrink: 0;
   width: 25px;
   height: 25px;

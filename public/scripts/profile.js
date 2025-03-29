@@ -12,17 +12,15 @@ const cancel = document.querySelector("#cancel");
 const overlay = document.querySelector(".overlay");
 const upload = document.querySelector(".upload");
 const accountData = document.querySelector(".accountData");
-const loader = document.querySelector(".box2");
+
 const profile = document.querySelector(".profileaddress");
 const profilePic = document.querySelector(".profilepicLoader");
 pencil.classList.remove("display");
 
 document.addEventListener("DOMContentLoaded", () => {
-  loader.style.display = "block";
   profile.style.display = "block";
   profilePic.style.display = "block";
   setTimeout(() => {
-    loader.style.display = "none";
     profile.style.display = "none";
     profilePic.style.display = "none";
   }, 1000);
@@ -89,7 +87,6 @@ t2.from(".upload", {
     delay: 1,
     display: "none",
   });
-// Event listener for the save button
 save.addEventListener("click", () => {
   notification.style.display = "flex";
   save.style.display = "none";

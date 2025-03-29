@@ -8,6 +8,7 @@
 }
 html,
 body {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -19,7 +20,6 @@ body {
 a {
   all: unset;
   text-decoration: none;
-  width: 100%;
 }
 .wrapper {
   position: relative;
@@ -354,6 +354,11 @@ textarea {
   padding: 2px;
   transform: translateY(5px);
 }
+.completeComments {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
 .add {
   width: 100%;
   display: flex;
@@ -361,8 +366,11 @@ textarea {
   gap: 5px;
   align-items: center;
   background-color: #a0a0a076;
-  padding: 12px 18px;
+  padding: 15px 18px;
   border-radius: 5px;
+}
+.commentinputField {
+  padding-right: 25px;
 }
 .commentinputField input {
   all: unset;
@@ -370,8 +378,8 @@ textarea {
   border-radius: 25px;
   background-color: rgb(255, 255, 255);
   border: none;
-  width: 98%;
-  padding: 12px 18px;
+  width: 90%;
+  padding: 15px 25px;
 }
 .completeComments,
 .allcomments {
@@ -553,7 +561,7 @@ textarea {
   position: absolute;
   top: 0;
   right: 0;
-  left: 0;
+  left: 30;
   z-index: 99999;
 }
 .communityQuestionsLoader {
@@ -649,7 +657,7 @@ textarea {
     background-position-x: -20%;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 530px) {
   .wrapper {
     margin-top: 80px;
   }
@@ -690,12 +698,19 @@ textarea {
   }
 }
 
-@media (max-width: 530px) {
+@media (max-width: 500px) {
   .randomQuestions {
+    width: 90%;
     padding: 15px;
     font-size: 14px;
   }
-
+  .overlay {
+    width: 30%;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    background-color: #00000000;
+  }
   .userDet {
     flex-direction: row;
     gap: 10px;
@@ -714,12 +729,21 @@ textarea {
   .thumbs {
     padding: 5px;
   }
+  .add {
+    width: 90%;
+  }
+  .ask {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
-@media (max-width: 300px) {
+/* @media (max-width: 300px) {
   .input input {
     display: none;
   }
   .communityHeadline {
     display: none;
   }
-}
+} */

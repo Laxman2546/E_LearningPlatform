@@ -12,8 +12,8 @@
   </head>
 
   <body>
-    <div class="loader"></div>
     <%- include('userNavbar') %>
+    <div class="loader"></div>
     <div class="wrapper overflow">
       <% if (messages.success) { %>
       <div class="notification">
@@ -190,31 +190,32 @@
                 name="comments"
                 value="<%= question.comment %>"
               />
-
-              <div class="add">
-                <div class="img">
-                  <img
-                    src="<%= user.profileImage && user.profileImage.data ? user.profileImage.data : '/images/default.png' %>"
-                    alt="User Profile Picture"
-                    width="40px"
-                    height="40px"
-                  />
-                </div>
-                <div class="commentField">
-                  <div class="commentinputField">
-                    <input
-                      type="text"
-                      name="commentText"
-                      placeholder="Add a comment..."
+              <div class="completeComments">
+                <div class="add">
+                  <div class="img">
+                    <img
+                      src="<%= user.profileImage && user.profileImage.data ? user.profileImage.data : '/images/default.png' %>"
+                      alt="User Profile Picture"
+                      width="40px"
+                      height="40px"
                     />
                   </div>
-                  <div
-                    class="commentOverlay commentClick"
-                    style="background-color: black"
-                  ></div>
-                  <button class="commentOverlay commentClick" type="submit">
-                    Add comment
-                  </button>
+                  <div class="commentField">
+                    <div class="commentinputField">
+                      <input
+                        type="text"
+                        name="commentText"
+                        placeholder="Add a comment..."
+                      />
+                    </div>
+                    <div
+                      class="commentOverlay commentClick"
+                      style="background-color: black"
+                    ></div>
+                    <button class="commentOverlay commentClick" type="submit">
+                      Add comment
+                    </button>
+                  </div>
                 </div>
               </div>
             </form>
