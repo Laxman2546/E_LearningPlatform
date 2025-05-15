@@ -117,7 +117,7 @@ app.get("/courses", isloggedin, async (req, res) => {
     const courses = await courseModel.find();
     const user = await userModel.findOne({ email });
     if (!user) {
-      req.flash("error", "User not found.");
+      req.flash("error", "User not found,please login agian");
       return res.redirect("/");
     }
 
