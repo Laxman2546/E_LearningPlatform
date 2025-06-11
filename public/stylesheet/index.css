@@ -172,8 +172,6 @@ body {
   stroke-dashoffset: -132px;
 }
 
-/* hero css */
-
 .section1 {
   width: 100%;
   height: 550px;
@@ -354,8 +352,6 @@ body {
   box-shadow: inset 0 0 0 10em #000000;
 }
 
-/*section2 */
-
 .trust {
   display: flex;
   align-items: center;
@@ -506,8 +502,6 @@ body {
   }
 }
 
-/* features */
-
 .featu {
   width: 98vw;
   height: 100vh;
@@ -632,7 +626,7 @@ p {
   width: 45vw;
   height: 60vh;
 }
-/* courses */
+
 .courses {
   width: 100%;
   height: auto;
@@ -852,7 +846,7 @@ p {
 .courseDetails:hover .Btn::before {
   width: 100%;
 }
-/* testinomials*/
+
 .testnomials {
   width: 100%;
   padding: 40px 20px;
@@ -1017,7 +1011,6 @@ p {
   color: inherit;
 }
 
-/* newsletter */
 .newsLetter {
   width: 50vw;
   height: 80vh;
@@ -1028,7 +1021,6 @@ p {
   background-color: #ffffff;
 }
 
-/* Footer Styling */
 .footer {
   background-color: #000;
   color: #fff;
@@ -1103,6 +1095,9 @@ p {
 a {
   text-decoration: none;
   color: white;
+}
+.github:hover {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 990px) {

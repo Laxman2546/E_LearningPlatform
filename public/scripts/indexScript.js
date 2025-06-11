@@ -7,7 +7,7 @@ let courseAll = document.querySelector(".coursesAll");
 const leftArrow = document.querySelector("#leftArrow");
 const rightArrow = document.querySelector("#rightArrow");
 const navLinks = document.querySelectorAll(".nav-main .nav-link");
-
+const footerYear = document.querySelector(".year");
 function activateCoursesLink() {
   navLinks.forEach((link) => link.classList.remove("active"));
   document.getElementById("coursesLink").classList.add("active");
@@ -70,8 +70,12 @@ function toggle(element, index, event) {
   });
 }
 
-// courses
-
+const year = () => {
+  const newYear = new Date();
+  const year = newYear.getFullYear();
+  return year;
+};
+footerYear.innerHTML = year();
 var courses = [
   {
     title: "webdevelopment",
