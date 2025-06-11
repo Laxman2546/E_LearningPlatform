@@ -87,6 +87,8 @@ var upload = multer({
   },
 });
 
+const { userCache } = require("./middleware/cache");
+
 function isloggedin(req, res, next) {
   const token = req.cookies.token;
   if (!token) {
@@ -94,8 +96,19 @@ function isloggedin(req, res, next) {
     return res.redirect("/");
   }
   try {
+    // Check cache first
+    const cachedUser = userCache.get(token);
+    if (cachedUser) {
+      req.user = cachedUser;
+      return next();
+    }
+
+    // Verify token if not in cache
     const data = jwt.verify(token, process.env.SECRET_KEY);
     req.user = data;
+
+    // Cache the user data
+    userCache.set(token, data, 600); // Cache for 10 minutes
     next();
   } catch (err) {
     console.log("JWT verification failed:", err);
@@ -122,17 +135,26 @@ app.use("/video", videosRoute);
 app.use("/community", communityRoute);
 app.use("/generative", generativeRouter);
 
-app.get("/courses", isloggedin, async (req, res) => {
+const { cacheMiddleware } = require("./middleware/cache");
+
+app.get("/courses", isloggedin, cacheMiddleware(300), async (req, res) => {
   try {
     const { email } = req.user;
-    const courses = await courseModel.find();
-    const user = await userModel.findOne({ email });
+
+    // Run queries in parallel
+    const [courses, user, enrolledCourses] = await Promise.all([
+      courseModel.find().lean(),
+      userModel.findOne({ email }).lean(),
+      enrolledModel.find({ userEmail: email }).select("title").lean(),
+    ]);
+
     if (!user) {
-      req.flash("error", "User not found,please login agian");
+      req.flash("error", "User not found, please login again");
       return res.redirect("/");
     }
 
-    if (user.profileImage && user.profileImage.data) {
+    // Process user profile image
+    if (user.profileImage?.data) {
       user.profileImage.data = `data:${
         user.profileImage.contentType
       };base64,${user.profileImage.data.toString("base64")}`;
@@ -140,9 +162,6 @@ app.get("/courses", isloggedin, async (req, res) => {
       user.profileImage = { data: "/images/default.png" };
     }
 
-    const enrolledCourses = await enrolledModel
-      .find({ userEmail: email })
-      .select("title");
     const enrolledTitles = new Set(enrolledCourses.map((ec) => ec.title));
 
     const coursesWithEnrollment = courses.map((course) => ({
@@ -324,21 +343,45 @@ let otpStorage = {};
 app.post("/create", async (req, res) => {
   const { username, email, password } = req.body;
 
+  if (!username || !email || !password) {
+    req.flash("error", "Please provide all required fields");
+    return res.redirect("/register");
+  }
+
   try {
-    const user = await userModel.findOne({ email });
-    if (user) {
+    // Check email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      req.flash("error", "Please provide a valid email address");
+      return res.redirect("/register");
+    }
+
+    // Check if user exists with lean() for better performance
+    const userExists = await userModel.findOne({ email }).lean();
+    if (userExists) {
       req.flash("error", "User already exists. Try logging in.");
       return res.redirect("/register");
     }
-    const otp = randomNumberGenerator();
-    otpStorage[email] = { otp, expiresAt: Date.now() + 10 * 60 * 1000 };
 
-    emailGenerator({ email, username }, otp);
+    const otp = randomNumberGenerator();
+    otpStorage[email] = {
+      otp,
+      expiresAt: Date.now() + 10 * 60 * 1000,
+      attempts: 0, // Track attempts
+    };
+
+    // Send email
+    await emailGenerator({ email, username }, otp);
+
     req.flash("success", "OTP sent to your email.");
-    return res.render("registerOtp", { email, username, password });
+    return res.render("registerOtp", {
+      email,
+      username,
+      password: password, // Consider not passing password in session instead
+    });
   } catch (err) {
     console.error("Error during registration:", err);
-    req.flash("error", "An error occurred during registration.");
+    req.flash("error", err.message || "An error occurred during registration.");
     res.redirect("/register");
   }
 });
@@ -622,8 +665,13 @@ app.post("/passwordChange", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    req.flash("error", "Please provide both email and password");
+    return res.redirect("/login");
+  }
+
   try {
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email }).select("+password").lean();
     if (!user) {
       req.flash("error", "Invalid email or password.");
       return res.redirect("/login");
@@ -635,16 +683,29 @@ app.post("/login", async (req, res) => {
       return res.redirect("/login");
     }
 
-    const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, {
-      expiresIn: "24h",
+    const token = jwt.sign(
+      {
+        email: user.email,
+        id: user._id,
+      },
+      process.env.SECRET_KEY,
+      {
+        expiresIn: "24h",
+      }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
     });
 
-    res.cookie("token", token, { httpOnly: true, secure: false });
     req.flash("success", "Login successful!");
     res.redirect("/courses");
   } catch (err) {
     console.error("Error during login:", err);
-    req.flash("error", "An error occurred during login.");
+    req.flash("error", "An error occurred during login. Please try again.");
     res.redirect("/login");
   }
 });
@@ -655,6 +716,18 @@ app.get("/logout", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+});
+
+// Handle cleanup on shutdown
+process.on("SIGTERM", () => {
+  console.info("SIGTERM signal received.");
+  server.close(() => {
+    console.log("Server closed.");
+    mongoose.connection.close(false, () => {
+      console.log("MongoDB connection closed.");
+      process.exit(0);
+    });
+  });
 });
