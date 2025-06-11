@@ -165,7 +165,7 @@ app.get("/courses", isloggedin, cacheMiddleware(300), async (req, res) => {
     const enrolledTitles = new Set(enrolledCourses.map((ec) => ec.title));
 
     const coursesWithEnrollment = courses.map((course) => ({
-      ...course.toObject(),
+      ...course,
       isEnrolled: enrolledTitles.has(course.title),
     }));
 
@@ -349,14 +349,13 @@ app.post("/create", async (req, res) => {
   }
 
   try {
-    // Check email format
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       req.flash("error", "Please provide a valid email address");
       return res.redirect("/register");
     }
 
-    // Check if user exists with lean() for better performance
     const userExists = await userModel.findOne({ email }).lean();
     if (userExists) {
       req.flash("error", "User already exists. Try logging in.");
@@ -367,17 +366,17 @@ app.post("/create", async (req, res) => {
     otpStorage[email] = {
       otp,
       expiresAt: Date.now() + 10 * 60 * 1000,
-      attempts: 0, // Track attempts
+      attempts: 0, 
     };
 
-    // Send email
+
     await emailGenerator({ email, username }, otp);
 
     req.flash("success", "OTP sent to your email.");
     return res.render("registerOtp", {
       email,
       username,
-      password: password, // Consider not passing password in session instead
+      password: password, 
     });
   } catch (err) {
     console.error("Error during registration:", err);
@@ -388,12 +387,14 @@ app.post("/create", async (req, res) => {
 
 app.post("/new", async (req, res) => {
   const { email, otp, password, username } = req.body;
-  if (!email) {
-    req.flash("error", "something went wrong try again!");
+  if (!email || !otp || !password || !username) {
+    req.flash("error", "Please provide all required fields");
+    return res.redirect("/register");
   }
+
   if (!otpStorage[email]) {
     req.flash("error", "OTP expired or invalid email.");
-    return res.redirect("/forgot");
+    return res.redirect("/register");
   }
 
   const { otp: storedOtp, expiresAt } = otpStorage[email];
@@ -401,7 +402,7 @@ app.post("/new", async (req, res) => {
   if (Date.now() > expiresAt) {
     delete otpStorage[email];
     req.flash("error", "OTP has expired. Please request a new one.");
-    return res.redirect("/forgot");
+    return res.redirect("/register");
   }
 
   if (parseInt(otp, 10) === storedOtp) {
@@ -426,7 +427,7 @@ app.post("/new", async (req, res) => {
     res.redirect("/courses");
   } else {
     req.flash("error", "Invalid OTP. Please try again.");
-    return res.redirect("/forgot");
+    return res.redirect("/register");
   }
 });
 
