@@ -4,23 +4,36 @@
     {
       "src": "script.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "handle": "filesystem"
+      "src": "/stylesheet/(.*)",
+      "headers": { "Content-Type": "text/css" },
+      "dest": "/public/stylesheet/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
+    },
+    {
+      "src": "/scripts/(.*)",
+      "dest": "/public/scripts/$1"
     },
     {
       "src": "/uploads/(.*)",
       "dest": "/uploads/$1"
     },
     {
-      "src": "/public/(.*)",
-      "dest": "/public/$1"
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "script.js"
+      "dest": "/script.js"
     }
   ]
 }
