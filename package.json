@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node script.js",
     "dev": "nodemon script.js",
-    "build": "npm install --production",
+    "build": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "lakshman",
