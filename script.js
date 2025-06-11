@@ -10,8 +10,7 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oidc");
+
 require("dotenv").config();
 //routers
 const adminRouter = require("./routes/adminRouter");
