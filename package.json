@@ -9,6 +9,7 @@
     "start": "node script.js",
     "dev": "nodemon script.js",
     "build": "npm install",
+    "vercel-build": "echo Building project...",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "lakshman",

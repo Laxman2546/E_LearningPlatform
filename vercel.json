@@ -8,17 +8,19 @@
   ],
   "routes": [
     {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/uploads/$1"
+    },
+    {
       "src": "/public/(.*)",
       "dest": "/public/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/script.js"
+      "dest": "script.js"
     }
-  ],
-  "functions": {
-    "script.js": {
-      "includeFiles": ["views/**", "public/**"]
-    }
-  }
+  ]
 }
