@@ -94,8 +94,8 @@
                     name="userId"
                     value="<%= user.email %>"
                   />
-                  <button type="submit" name="btnEnroll" class="BtnEnroll">
-                    Enroll Now
+                  <button type="submit" name="btnEnroll" class="BtnEnroll" <%= course.isEnrolled ? 'disabled' : '' %>>
+                    <%= course.isEnrolled ? 'Enrolled' : 'Enroll Now' %>
                   </button>
                 </form>
                 <form class="form" action="/course/learning" method="post">

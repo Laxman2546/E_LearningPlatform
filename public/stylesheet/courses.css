@@ -557,6 +557,18 @@ a {
   background-color: #9000ffe1;
   color: white;
 }
+
+.courseBtn .BtnEnroll:disabled {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+  color: #666;
+  cursor: default;
+}
+
+.courseBtn .BtnEnroll:disabled:hover {
+  background-color: #e0e0e0;
+  color: #666;
+}
 .notification {
   position: absolute;
   top: 30px;

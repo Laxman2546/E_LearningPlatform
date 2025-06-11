@@ -13,7 +13,7 @@ const cors = require("cors");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oidc");
 require("dotenv").config();
-//routers required
+//routers
 const adminRouter = require("./routes/adminRouter");
 const courseRoute = require("./routes/coursesRoute");
 const videosRoute = require("./routes/videosRoute");
@@ -58,7 +58,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Multer setup for file uploads
 const storage = multer.memoryStorage();
 var upload = multer({
   storage,
@@ -74,7 +73,6 @@ var upload = multer({
   },
 });
 
-// Authentication middleware
 function isloggedin(req, res, next) {
   const token = req.cookies.token;
   if (!token) {
@@ -92,7 +90,6 @@ function isloggedin(req, res, next) {
   }
 }
 
-// Routes
 app.get("/", (req, res) => {
   res.render("index");
 });
@@ -110,7 +107,7 @@ app.use("/course", courseRoute);
 app.use("/video", videosRoute);
 app.use("/community", communityRoute);
 app.use("/generative", generativeRouter);
-// Course route (GET)
+
 app.get("/courses", isloggedin, async (req, res) => {
   try {
     const { email } = req.user;
@@ -128,7 +125,18 @@ app.get("/courses", isloggedin, async (req, res) => {
     } else {
       user.profileImage = { data: "/images/default.png" };
     }
-    const groupedCourses = courses.reduce((result, course) => {
+
+    const enrolledCourses = await enrolledModel
+      .find({ userEmail: email })
+      .select("title");
+    const enrolledTitles = new Set(enrolledCourses.map((ec) => ec.title));
+
+    const coursesWithEnrollment = courses.map((course) => ({
+      ...course.toObject(),
+      isEnrolled: enrolledTitles.has(course.title),
+    }));
+
+    const groupedCourses = coursesWithEnrollment.reduce((result, course) => {
       const category = course.category || "Uncategorized";
       if (!result[category]) {
         result[category] = [];
@@ -136,7 +144,11 @@ app.get("/courses", isloggedin, async (req, res) => {
       result[category].push(course);
       return result;
     }, {});
-    res.render("courses", { user, courses, groupedCourses });
+    res.render("courses", {
+      user,
+      courses: coursesWithEnrollment,
+      groupedCourses,
+    });
   } catch (err) {
     console.error("Error fetching user data:", err);
     req.flash("error", "An error occurred while loading courses.");
@@ -168,7 +180,6 @@ app.get("/profile", isloggedin, async (req, res) => {
   }
 });
 
-// Profile update route
 app.post(
   "/profile/update",
   isloggedin,
@@ -186,7 +197,6 @@ app.post(
         };
       }
 
-      // Check if the username is already taken by another user
       const existingUsername = await userModel.findOne({
         username,
         email: { $ne: email },
@@ -197,7 +207,6 @@ app.post(
         return res.redirect("/profile");
       }
 
-      // Update the user in userModel
       const updatedUser = await userModel.findOneAndUpdate(
         { email },
         updateData,
@@ -236,7 +245,6 @@ app.post(
         });
       }
 
-      // Success
       req.flash("success", "Profile updated successfully!");
       res.redirect("/profile");
     } catch (err) {
@@ -298,7 +306,7 @@ app.post("/profile/continue", isloggedin, async (req, res) => {
   res.send("user not found");
 });
 let otpStorage = {};
-// Register a new user
+
 app.post("/create", async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -310,7 +318,7 @@ app.post("/create", async (req, res) => {
     }
     const otp = randomNumberGenerator();
     otpStorage[email] = { otp, expiresAt: Date.now() + 10 * 60 * 1000 };
-    console.log(otpStorage[email]);
+
     emailGenerator({ email, username }, otp);
     req.flash("success", "OTP sent to your email.");
     return res.render("registerOtp", { email, username, password });
@@ -332,17 +340,16 @@ app.post("/new", async (req, res) => {
   }
 
   const { otp: storedOtp, expiresAt } = otpStorage[email];
-  console.log("Stored OTP:", storedOtp);
+
   if (Date.now() > expiresAt) {
     delete otpStorage[email];
     req.flash("error", "OTP has expired. Please request a new one.");
     return res.redirect("/forgot");
   }
 
-  // Ensure `otp` is parsed as an integer (if necessary)
   if (parseInt(otp, 10) === storedOtp) {
     delete otpStorage[email];
-    console.log("from done", email);
+
     req.flash("success", "OTP verified successfully!");
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -365,15 +372,12 @@ app.post("/new", async (req, res) => {
     return res.redirect("/forgot");
   }
 });
-// Temporary object to store OTPs
 
-// Function to generate a random OTP
 const randomNumberGenerator = () => {
-  const number = Math.floor(1000 + Math.random() * 9000); // 6-digit OTP
+  const number = Math.floor(1000 + Math.random() * 9000);
   return number;
 };
 
-// Function to send the OTP via email
 const emailGenerator = (user, otp) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -437,7 +441,6 @@ const emailGenerator = (user, otp) => {
   });
 };
 
-// Route to render the forgot password page
 app.get("/forgot", (req, res) => {
   res.render("forgot");
 });
@@ -456,7 +459,7 @@ app.post("/forgot", async (req, res) => {
 
   const otp = randomNumberGenerator();
   otpStorage[email] = { otp, expiresAt: Date.now() + 10 * 60 * 1000 };
-  console.log(otpStorage[email]);
+
   emailGenerator(user, otp);
   req.flash("success", "OTP sent to your email.");
   return res.render("otp", { email });
@@ -564,16 +567,15 @@ app.post("/check", (req, res) => {
   }
 
   const { otp: storedOtp, expiresAt } = otpStorage[email];
-  console.log("Stored OTP:", storedOtp);
-  // Check if OTP is expired
+
   if (Date.now() > expiresAt) {
-    delete otpStorage[email]; // Remove expired OTP
+    delete otpStorage[email];
     req.flash("error", "OTP has expired. Please request a new one.");
     return res.redirect("/forgot");
   }
   if (parseInt(otp, 10) === storedOtp) {
     delete otpStorage[email];
-    console.log("from done", email);
+
     req.flash("success", "OTP verified successfully!");
     return res.render("resetpassword", { email: email });
   } else {
@@ -583,12 +585,11 @@ app.post("/check", (req, res) => {
 });
 app.post("/passwordChange", async (req, res) => {
   const { email, password } = req.body;
-  console.log(email);
+
   if (!email) {
     req.flash("error", "something went wrong try again!");
   }
   const updatePassword = password;
-  console.log(updatePassword);
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(updatePassword, salt);
   const user = await userModel.findOneAndUpdate(
@@ -603,7 +604,7 @@ app.post("/passwordChange", async (req, res) => {
   req.flash("success", "Password reset successfully!");
   res.redirect("/login");
 });
-// Login route
+
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -633,13 +634,12 @@ app.post("/login", async (req, res) => {
     res.redirect("/login");
   }
 });
-// Logout route
+
 app.get("/logout", (req, res) => {
   res.cookie("token", "", { expires: new Date(0), httpOnly: true });
   res.redirect("/login");
 });
 
-// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
