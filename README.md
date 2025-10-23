@@ -2,7 +2,8 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Tech](https://img.shields.io/badge/Stack-MEEN-green.svg)
-![Status](https://img.shields.io/badge/Status-In%20Progress-orange.svg)
+![Status](https://img.shields.io/badge/Status-Completed-success.svg)
+
 
 ## 🚀 Overview  
 **Study Lane** is an interactive **AI-powered learning platform** built using the **MEEN stack (MongoDB, Express.js, EJS, Node.js)**.  
