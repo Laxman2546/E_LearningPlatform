@@ -43,16 +43,14 @@ Follow these steps to set up the project locally 👇
 # 1️⃣ Clone the repository
 git clone https://github.com/Laxman2546/Study-Lane.git
 
-# 2️⃣ Navigate into the folder
-cd Study-Lane
 
-# 3️⃣ Install dependencies
+# 2️⃣ Install dependencies
 npm install
 
-# 4️⃣ Add environment variables (.env)
+# 3️⃣ Add environment variables (.env)
 MONGO_URI=your_mongodb_connection_string
 GEMINI_KEY=your_api_key
 PORT=5000
 
-# 5️⃣ Run the server
+# 4️⃣ Run the server
 npx nodemon
